@@ -1,0 +1,3 @@
+TARGET_ARCH=macosx
+UI_TYPE=cocoa
+TARGET_STATUS=debug
