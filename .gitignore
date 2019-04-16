@@ -6,8 +6,14 @@ makefiles/target.mk
 *.d
 *.pyc
 zlibrary/core/libzlcore.so*
+zlibrary/core/libzlcore.a*
 zlibrary/text/libzltext.so*
+zlibrary/text/libzltext.a*
 zlibrary/ui/zlui-qt4.so
 zlibrary/ui/zlui-gtk.so
 zlibrary/ui/zlui-qt.so
+zlibrary/ui/libzlui-*.so
+zlibrary/ui/libzlui-*.a
 fbreader/FBReader
+
+.idea

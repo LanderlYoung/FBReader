@@ -1,0 +1,1363 @@
+cmake_minimum_required(VERSION 3.13)
+project(FBReader_master)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(atom-tests/src)
+include_directories(atom-tests/src/network)
+include_directories(atom-tests/src/network/atom)
+include_directories(atom-tests/src/network/authentication)
+include_directories(atom-tests/src/network/authentication/basic)
+include_directories(atom-tests/src/network/authentication/litres)
+include_directories(atom-tests/src/network/opds)
+include_directories(fbreader/src/blockTree)
+include_directories(fbreader/src/bookmodel)
+include_directories(fbreader/src/database/booksdb)
+include_directories(fbreader/src/database/sqldb)
+include_directories(fbreader/src/database/sqldb/implsqlite)
+include_directories(fbreader/src/encodingOption)
+include_directories(fbreader/src/external)
+include_directories(fbreader/src/fbreader)
+include_directories(fbreader/src/formats)
+include_directories(fbreader/src/formats/chm)
+include_directories(fbreader/src/formats/css)
+include_directories(fbreader/src/formats/docbook)
+include_directories(fbreader/src/formats/dummy)
+include_directories(fbreader/src/formats/fb2)
+include_directories(fbreader/src/formats/html)
+include_directories(fbreader/src/formats/oeb)
+include_directories(fbreader/src/formats/openreader)
+include_directories(fbreader/src/formats/pdb)
+include_directories(fbreader/src/formats/pdf)
+include_directories(fbreader/src/formats/rtf)
+include_directories(fbreader/src/formats/tcr)
+include_directories(fbreader/src/formats/txt)
+include_directories(fbreader/src/formats/util)
+include_directories(fbreader/src/formats/xhtml)
+include_directories(fbreader/src/library)
+include_directories(fbreader/src/libraryActions)
+include_directories(fbreader/src/libraryTree)
+include_directories(fbreader/src/migration)
+include_directories(fbreader/src/network)
+include_directories(fbreader/src/network/atom)
+include_directories(fbreader/src/network/authentication)
+include_directories(fbreader/src/network/authentication/basic)
+include_directories(fbreader/src/network/authentication/litres)
+include_directories(fbreader/src/network/opds)
+include_directories(fbreader/src/networkActions)
+include_directories(fbreader/src/networkTree)
+include_directories(fbreader/src/options)
+include_directories(fbreader/src/optionsDialog)
+include_directories(fbreader/src/optionsDialog/bookInfo)
+include_directories(fbreader/src/optionsDialog/library)
+include_directories(fbreader/src/optionsDialog/lookAndFeel)
+include_directories(fbreader/src/optionsDialog/network)
+include_directories(fbreader/src/optionsDialog/reading)
+include_directories(fbreader/src/optionsDialog/system)
+include_directories(libs/macosx/include)
+include_directories(libs/macosx/include/fribidi)
+include_directories(zlibrary/core/include)
+include_directories(zlibrary/core/include/optionEntries)
+include_directories(zlibrary/core/src/application)
+include_directories(zlibrary/core/src/blockTreeView)
+include_directories(zlibrary/core/src/constants)
+include_directories(zlibrary/core/src/desktop/application)
+include_directories(zlibrary/core/src/desktop/dialogs)
+include_directories(zlibrary/core/src/dialogs)
+include_directories(zlibrary/core/src/encoding)
+include_directories(zlibrary/core/src/filesystem)
+include_directories(zlibrary/core/src/filesystem/bzip2)
+include_directories(zlibrary/core/src/filesystem/tar)
+include_directories(zlibrary/core/src/filesystem/zip)
+include_directories(zlibrary/core/src/image)
+include_directories(zlibrary/core/src/language)
+include_directories(zlibrary/core/src/library)
+include_directories(zlibrary/core/src/logger)
+include_directories(zlibrary/core/src/message)
+include_directories(zlibrary/core/src/network)
+include_directories(zlibrary/core/src/network/requests)
+include_directories(zlibrary/core/src/optionEntries)
+include_directories(zlibrary/core/src/options)
+include_directories(zlibrary/core/src/resources)
+include_directories(zlibrary/core/src/runnable)
+include_directories(zlibrary/core/src/time)
+include_directories(zlibrary/core/src/typeId)
+include_directories(zlibrary/core/src/unix/curl)
+include_directories(zlibrary/core/src/unix/filesystem)
+include_directories(zlibrary/core/src/unix/iconv)
+include_directories(zlibrary/core/src/unix/library)
+include_directories(zlibrary/core/src/unix/time)
+include_directories(zlibrary/core/src/unix/xmlconfig)
+include_directories(zlibrary/core/src/util)
+include_directories(zlibrary/core/src/view)
+include_directories(zlibrary/core/src/win32/config)
+include_directories(zlibrary/core/src/win32/encoding)
+include_directories(zlibrary/core/src/win32/filesystem)
+include_directories(zlibrary/core/src/win32/util)
+include_directories(zlibrary/core/src/xml)
+include_directories(zlibrary/core/src/xml/expat)
+include_directories(zlibrary/text/include)
+include_directories(zlibrary/text/src/area)
+include_directories(zlibrary/text/src/hyphenation)
+include_directories(zlibrary/text/src/model)
+include_directories(zlibrary/text/src/style)
+include_directories(zlibrary/text/src/styleOptions)
+include_directories(zlibrary/text/src/view)
+include_directories(zlibrary/ui/src/cocoa/application)
+include_directories(zlibrary/ui/src/cocoa/dialogs)
+include_directories(zlibrary/ui/src/cocoa/filesystem)
+include_directories(zlibrary/ui/src/cocoa/image)
+include_directories(zlibrary/ui/src/cocoa/library)
+include_directories(zlibrary/ui/src/cocoa/message)
+include_directories(zlibrary/ui/src/cocoa/time)
+include_directories(zlibrary/ui/src/cocoa/util)
+include_directories(zlibrary/ui/src/cocoa/view)
+include_directories(zlibrary/ui/src/ezx/application)
+include_directories(zlibrary/ui/src/ezx/dialogs)
+include_directories(zlibrary/ui/src/ezx/optionView)
+include_directories(zlibrary/ui/src/ezx/view)
+include_directories(zlibrary/ui/src/gpe/application)
+include_directories(zlibrary/ui/src/gpe/dialogs)
+include_directories(zlibrary/ui/src/gpe/view)
+include_directories(zlibrary/ui/src/gtk/application-desktop)
+include_directories(zlibrary/ui/src/gtk/application-pdaxrom)
+include_directories(zlibrary/ui/src/gtk/application-pepperpad3)
+include_directories(zlibrary/ui/src/gtk/dialogs)
+include_directories(zlibrary/ui/src/gtk/filesystem)
+include_directories(zlibrary/ui/src/gtk/image)
+include_directories(zlibrary/ui/src/gtk/optionView)
+include_directories(zlibrary/ui/src/gtk/pixbuf)
+include_directories(zlibrary/ui/src/gtk/time)
+include_directories(zlibrary/ui/src/gtk/util)
+include_directories(zlibrary/ui/src/gtk/view)
+include_directories(zlibrary/ui/src/iphone/application)
+include_directories(zlibrary/ui/src/iphone/dialogs)
+include_directories(zlibrary/ui/src/iphone/filesystem)
+include_directories(zlibrary/ui/src/iphone/image)
+include_directories(zlibrary/ui/src/iphone/library)
+include_directories(zlibrary/ui/src/iphone/time)
+include_directories(zlibrary/ui/src/iphone/view)
+include_directories(zlibrary/ui/src/maemo/application)
+include_directories(zlibrary/ui/src/maemo/dialogs)
+include_directories(zlibrary/ui/src/maemo/message)
+include_directories(zlibrary/ui/src/maemo/network)
+include_directories(zlibrary/ui/src/maemo/optionView)
+include_directories(zlibrary/ui/src/maemo/time)
+include_directories(zlibrary/ui/src/maemo/view)
+include_directories(zlibrary/ui/src/maemo5/application)
+include_directories(zlibrary/ui/src/maemo5/dialogs)
+include_directories(zlibrary/ui/src/maemo5/message)
+include_directories(zlibrary/ui/src/maemo5/network)
+include_directories(zlibrary/ui/src/maemo5/optionView)
+include_directories(zlibrary/ui/src/maemo5/time)
+include_directories(zlibrary/ui/src/maemo5/view)
+include_directories(zlibrary/ui/src/opie/application)
+include_directories(zlibrary/ui/src/opie/dialogs)
+include_directories(zlibrary/ui/src/opie/view)
+include_directories(zlibrary/ui/src/qt/application-desktop)
+include_directories(zlibrary/ui/src/qt/application-pdaxrom)
+include_directories(zlibrary/ui/src/qt/dialogs)
+include_directories(zlibrary/ui/src/qt/filesystem)
+include_directories(zlibrary/ui/src/qt/image)
+include_directories(zlibrary/ui/src/qt/time)
+include_directories(zlibrary/ui/src/qt/util)
+include_directories(zlibrary/ui/src/qt/view)
+include_directories(zlibrary/ui/src/qt4/application)
+include_directories(zlibrary/ui/src/qt4/dialogs)
+include_directories(zlibrary/ui/src/qt4/filesystem)
+include_directories(zlibrary/ui/src/qt4/image)
+include_directories(zlibrary/ui/src/qt4/time)
+include_directories(zlibrary/ui/src/qt4/util)
+include_directories(zlibrary/ui/src/qt4/view)
+include_directories(zlibrary/ui/src/qtopia/application)
+include_directories(zlibrary/ui/src/qtopia/dialogs)
+include_directories(zlibrary/ui/src/qtopia/message)
+include_directories(zlibrary/ui/src/qtopia/optionView)
+include_directories(zlibrary/ui/src/qtopia/view)
+include_directories(zlibrary/ui/src/unix/message)
+include_directories(zlibrary/ui/src/win32/application)
+include_directories(zlibrary/ui/src/win32/dialogs)
+include_directories(zlibrary/ui/src/win32/image)
+include_directories(zlibrary/ui/src/win32/message)
+include_directories(zlibrary/ui/src/win32/time)
+include_directories(zlibrary/ui/src/win32/view)
+include_directories(zlibrary/ui/src/win32/w32widgets)
+
+add_executable(FBReader_master
+        atom-tests/src/network/atom/ATOMConstructs.cpp
+        atom-tests/src/network/atom/ATOMConstructs.h
+        atom-tests/src/network/atom/ATOMContainers.cpp
+        atom-tests/src/network/atom/ATOMContainers.h
+        atom-tests/src/network/atom/ATOMMetadata.cpp
+        atom-tests/src/network/atom/ATOMMetadata.h
+        atom-tests/src/network/authentication/basic/BasicAuthenticationManager.cpp
+        atom-tests/src/network/authentication/basic/BasicAuthenticationManager.h
+        atom-tests/src/network/authentication/basic/BasicAuthenticationRequest.cpp
+        atom-tests/src/network/authentication/basic/BasicAuthenticationRequest.h
+        atom-tests/src/network/authentication/litres/LitResAuthenticationDataParser.cpp
+        atom-tests/src/network/authentication/litres/LitResAuthenticationDataParser.h
+        atom-tests/src/network/authentication/litres/LitResAuthenticationManager.cpp
+        atom-tests/src/network/authentication/litres/LitResAuthenticationManager.h
+        atom-tests/src/network/authentication/litres/LitResBookshelfItem.cpp
+        atom-tests/src/network/authentication/litres/LitResBookshelfItem.h
+        atom-tests/src/network/authentication/litres/LitResDataParser.cpp
+        atom-tests/src/network/authentication/litres/LitResDataParser.h
+        atom-tests/src/network/authentication/litres/LitResGenre.cpp
+        atom-tests/src/network/authentication/litres/LitResGenre.h
+        atom-tests/src/network/authentication/litres/LitResGenresParser.cpp
+        atom-tests/src/network/authentication/litres/LitResGenresParser.h
+        atom-tests/src/network/authentication/litres/LitResUtil.cpp
+        atom-tests/src/network/authentication/litres/LitResUtil.h
+        atom-tests/src/network/authentication/NetworkAuthenticationManager.cpp
+        atom-tests/src/network/authentication/NetworkAuthenticationManager.h
+        atom-tests/src/network/opds/NetworkOPDSFeedReader.cpp
+        atom-tests/src/network/opds/NetworkOPDSFeedReader.h
+        atom-tests/src/network/opds/OPDSCatalogItem.cpp
+        atom-tests/src/network/opds/OPDSCatalogItem.h
+        atom-tests/src/network/opds/OPDSFeedReader.h
+        atom-tests/src/network/opds/OPDSLink.cpp
+        atom-tests/src/network/opds/OPDSLink.h
+        atom-tests/src/network/opds/OPDSLink_AdvancedSearch.h
+        atom-tests/src/network/opds/OPDSLink_Reader.cpp
+        atom-tests/src/network/opds/OPDSLink_Reader.h
+        atom-tests/src/network/opds/OPDSMetadata.cpp
+        atom-tests/src/network/opds/OPDSMetadata.h
+        atom-tests/src/network/opds/OPDSXMLParser.cpp
+        atom-tests/src/network/opds/OPDSXMLParser.h
+        atom-tests/src/network/opds/URLRewritingRule.h
+        atom-tests/src/ATOMDateTests.cpp
+        atom-tests/src/ATOMDateTests_parse.cpp
+        atom-tests/src/ATOMDateTests_tz.cpp
+        atom-tests/src/main.cpp
+        atom-tests/src/Tests.h
+        fbreader/moto/util/language_detector.cpp
+        fbreader/src/blockTree/FBReaderNode.cpp
+        fbreader/src/blockTree/FBReaderNode.h
+        fbreader/src/bookmodel/BookModel.cpp
+        fbreader/src/bookmodel/BookModel.h
+        fbreader/src/bookmodel/BookReader.cpp
+        fbreader/src/bookmodel/BookReader.h
+        fbreader/src/bookmodel/FBTextKind.h
+        fbreader/src/database/booksdb/runnables/ClearBooksDBRunnable.cpp
+        fbreader/src/database/booksdb/runnables/DeleteBookRunnable.cpp
+        fbreader/src/database/booksdb/runnables/DeleteFileEntriesRunnable.cpp
+        fbreader/src/database/booksdb/runnables/FindFileIdRunnable.cpp
+        fbreader/src/database/booksdb/runnables/InitBooksDBRunnable.cpp
+        fbreader/src/database/booksdb/runnables/LoadFileEntriesRunnable.cpp
+        fbreader/src/database/booksdb/runnables/LoadRecentBooksRunnable.cpp
+        fbreader/src/database/booksdb/runnables/SaveAuthorsRunnable.cpp
+        fbreader/src/database/booksdb/runnables/SaveBookRunnable.cpp
+        fbreader/src/database/booksdb/runnables/SaveBookStateStackRunnable.cpp
+        fbreader/src/database/booksdb/runnables/SaveRecentBooksRunnable.cpp
+        fbreader/src/database/booksdb/runnables/SaveSeriesRunnable.cpp
+        fbreader/src/database/booksdb/runnables/SaveTableBookRunnable.cpp
+        fbreader/src/database/booksdb/BooksDB.cpp
+        fbreader/src/database/booksdb/BooksDB.h
+        fbreader/src/database/booksdb/BooksDB_BookAuthor.cpp
+        fbreader/src/database/booksdb/BooksDB_BookSeries.cpp
+        fbreader/src/database/booksdb/BooksDB_BookTag.cpp
+        fbreader/src/database/booksdb/BooksDBQuery.cpp
+        fbreader/src/database/booksdb/BooksDBQuery.h
+        fbreader/src/database/booksdb/BooksDBUtil.cpp
+        fbreader/src/database/booksdb/BooksDBUtil.h
+        fbreader/src/database/booksdb/DBRunnables.h
+        fbreader/src/database/sqldb/implsqlite/SQLiteCommand.cpp
+        fbreader/src/database/sqldb/implsqlite/SQLiteCommand.h
+        fbreader/src/database/sqldb/implsqlite/SQLiteConnection.cpp
+        fbreader/src/database/sqldb/implsqlite/SQLiteConnection.h
+        fbreader/src/database/sqldb/implsqlite/SQLiteDataBase.cpp
+        fbreader/src/database/sqldb/implsqlite/SQLiteDataBase.h
+        fbreader/src/database/sqldb/implsqlite/SQLiteDataReader.cpp
+        fbreader/src/database/sqldb/implsqlite/SQLiteDataReader.h
+        fbreader/src/database/sqldb/implsqlite/SQLiteFactory.cpp
+        fbreader/src/database/sqldb/implsqlite/SQLiteFactory.h
+        fbreader/src/database/sqldb/DataBase.cpp
+        fbreader/src/database/sqldb/DataBase.h
+        fbreader/src/database/sqldb/DBCommand.cpp
+        fbreader/src/database/sqldb/DBCommand.h
+        fbreader/src/database/sqldb/DBCommandParameter.cpp
+        fbreader/src/database/sqldb/DBCommandParameter.h
+        fbreader/src/database/sqldb/DBConnection.cpp
+        fbreader/src/database/sqldb/DBConnection.h
+        fbreader/src/database/sqldb/DBDataReader.cpp
+        fbreader/src/database/sqldb/DBDataReader.h
+        fbreader/src/database/sqldb/DBIntValue.cpp
+        fbreader/src/database/sqldb/DBNullValue.cpp
+        fbreader/src/database/sqldb/DBRealValue.cpp
+        fbreader/src/database/sqldb/DBRunnable.h
+        fbreader/src/database/sqldb/DBTextValue.cpp
+        fbreader/src/database/sqldb/DBValue.cpp
+        fbreader/src/database/sqldb/DBValues.h
+        fbreader/src/encodingOption/EncodingOptionEntry.cpp
+        fbreader/src/encodingOption/EncodingOptionEntry.h
+        fbreader/src/external/ProgramCollection.cpp
+        fbreader/src/external/ProgramCollection.h
+        fbreader/src/fbreader/AddBookAction.cpp
+        fbreader/src/fbreader/BooksOrderAction.cpp
+        fbreader/src/fbreader/BookTextView.cpp
+        fbreader/src/fbreader/BookTextView.h
+        fbreader/src/fbreader/ContentsView.cpp
+        fbreader/src/fbreader/ContentsView.h
+        fbreader/src/fbreader/FBReader.cpp
+        fbreader/src/fbreader/FBReader.h
+        fbreader/src/fbreader/FBReaderActionCode.cpp
+        fbreader/src/fbreader/FBReaderActions.cpp
+        fbreader/src/fbreader/FBReaderActions.h
+        fbreader/src/fbreader/FBView.cpp
+        fbreader/src/fbreader/FBView.h
+        fbreader/src/fbreader/FootnoteView.h
+        fbreader/src/fbreader/main.cpp
+        fbreader/src/fbreader/PreferencesPopupData.cpp
+        fbreader/src/fbreader/PreferencesPopupData.h
+        fbreader/src/fbreader/ReadingState.h
+        fbreader/src/fbreader/RecentBooksPopupData.cpp
+        fbreader/src/fbreader/RecentBooksPopupData.h
+        fbreader/src/fbreader/ScrollingAction.cpp
+        fbreader/src/fbreader/ScrollingAction.h
+        fbreader/src/fbreader/SearchActions.cpp
+        fbreader/src/fbreader/SearchOnNetworkAction.cpp
+        fbreader/src/fbreader/TimeUpdater.cpp
+        fbreader/src/fbreader/TimeUpdater.h
+        fbreader/src/formats/chm/BitStream.cpp
+        fbreader/src/formats/chm/BitStream.h
+        fbreader/src/formats/chm/CHMFile.cpp
+        fbreader/src/formats/chm/CHMFile.h
+        fbreader/src/formats/chm/CHMFileImage.cpp
+        fbreader/src/formats/chm/CHMFileImage.h
+        fbreader/src/formats/chm/CHMPlugin.cpp
+        fbreader/src/formats/chm/CHMPlugin.h
+        fbreader/src/formats/chm/CHMReferenceCollection.cpp
+        fbreader/src/formats/chm/CHMReferenceCollection.h
+        fbreader/src/formats/chm/E8Decoder.cpp
+        fbreader/src/formats/chm/HHCReader.cpp
+        fbreader/src/formats/chm/HHCReader.h
+        fbreader/src/formats/chm/HHCReferenceCollector.cpp
+        fbreader/src/formats/chm/HHCReferenceCollector.h
+        fbreader/src/formats/chm/HtmlSectionReader.cpp
+        fbreader/src/formats/chm/HtmlSectionReader.h
+        fbreader/src/formats/chm/HuffmanDecoder.cpp
+        fbreader/src/formats/chm/HuffmanDecoder.h
+        fbreader/src/formats/chm/LZXDecompressor.cpp
+        fbreader/src/formats/chm/LZXDecompressor.h
+        fbreader/src/formats/css/StyleSheetParser.cpp
+        fbreader/src/formats/css/StyleSheetParser.h
+        fbreader/src/formats/css/StyleSheetTable.cpp
+        fbreader/src/formats/css/StyleSheetTable.h
+        fbreader/src/formats/docbook/DocBookBookReader.cpp
+        fbreader/src/formats/docbook/DocBookBookReader.h
+        fbreader/src/formats/docbook/DocBookDescriptionReader.cpp
+        fbreader/src/formats/docbook/DocBookDescriptionReader.h
+        fbreader/src/formats/docbook/DocBookPlugin.cpp
+        fbreader/src/formats/docbook/DocBookPlugin.h
+        fbreader/src/formats/docbook/DocBookReader.cpp
+        fbreader/src/formats/docbook/DocBookReader.h
+        fbreader/src/formats/dummy/DummyBookReader.cpp
+        fbreader/src/formats/dummy/DummyBookReader.h
+        fbreader/src/formats/dummy/DummyMetaInfoReader.cpp
+        fbreader/src/formats/dummy/DummyMetaInfoReader.h
+        fbreader/src/formats/dummy/DummyPlugin.cpp
+        fbreader/src/formats/dummy/DummyPlugin.h
+        fbreader/src/formats/fb2/FB2BookReader.cpp
+        fbreader/src/formats/fb2/FB2BookReader.h
+        fbreader/src/formats/fb2/FB2CoverReader.cpp
+        fbreader/src/formats/fb2/FB2CoverReader.h
+        fbreader/src/formats/fb2/FB2MetaInfoReader.cpp
+        fbreader/src/formats/fb2/FB2MetaInfoReader.h
+        fbreader/src/formats/fb2/FB2Plugin.cpp
+        fbreader/src/formats/fb2/FB2Plugin.h
+        fbreader/src/formats/fb2/FB2Reader.cpp
+        fbreader/src/formats/fb2/FB2Reader.h
+        fbreader/src/formats/fb2/FB2TagManager.cpp
+        fbreader/src/formats/fb2/FB2TagManager.h
+        fbreader/src/formats/html/HtmlBookReader.cpp
+        fbreader/src/formats/html/HtmlBookReader.h
+        fbreader/src/formats/html/HtmlDescriptionReader.cpp
+        fbreader/src/formats/html/HtmlDescriptionReader.h
+        fbreader/src/formats/html/HtmlEntityCollection.cpp
+        fbreader/src/formats/html/HtmlEntityCollection.h
+        fbreader/src/formats/html/HtmlPlugin.cpp
+        fbreader/src/formats/html/HtmlPlugin.h
+        fbreader/src/formats/html/HtmlReader.cpp
+        fbreader/src/formats/html/HtmlReader.h
+        fbreader/src/formats/html/HtmlReaderStream.cpp
+        fbreader/src/formats/html/HtmlReaderStream.h
+        fbreader/src/formats/html/HtmlTagActions.h
+        fbreader/src/formats/oeb/NCXReader.cpp
+        fbreader/src/formats/oeb/NCXReader.h
+        fbreader/src/formats/oeb/OEBBookReader.cpp
+        fbreader/src/formats/oeb/OEBBookReader.h
+        fbreader/src/formats/oeb/OEBCoverReader.cpp
+        fbreader/src/formats/oeb/OEBCoverReader.h
+        fbreader/src/formats/oeb/OEBMetaInfoReader.cpp
+        fbreader/src/formats/oeb/OEBMetaInfoReader.h
+        fbreader/src/formats/oeb/OEBPlugin.cpp
+        fbreader/src/formats/oeb/OEBPlugin.h
+        fbreader/src/formats/oeb/OEBTextStream.cpp
+        fbreader/src/formats/oeb/OEBTextStream.h
+        fbreader/src/formats/openreader/OpenReaderPlugin.cpp
+        fbreader/src/formats/openreader/OpenReaderPlugin.h
+        fbreader/src/formats/openreader/ORBookReader.cpp
+        fbreader/src/formats/openreader/ORBookReader.h
+        fbreader/src/formats/openreader/ORDescriptionReader.cpp
+        fbreader/src/formats/openreader/ORDescriptionReader.h
+        fbreader/src/formats/pdb/BitReader.cpp
+        fbreader/src/formats/pdb/BitReader.h
+        fbreader/src/formats/pdb/DocDecompressor.cpp
+        fbreader/src/formats/pdb/DocDecompressor.h
+        fbreader/src/formats/pdb/EReaderPlugin.cpp
+        fbreader/src/formats/pdb/EReaderStream.cpp
+        fbreader/src/formats/pdb/EReaderStream.h
+        fbreader/src/formats/pdb/HtmlMetainfoReader.cpp
+        fbreader/src/formats/pdb/HtmlMetainfoReader.h
+        fbreader/src/formats/pdb/HuffDecompressor.cpp
+        fbreader/src/formats/pdb/HuffDecompressor.h
+        fbreader/src/formats/pdb/MobipocketHtmlBookReader.cpp
+        fbreader/src/formats/pdb/MobipocketHtmlBookReader.h
+        fbreader/src/formats/pdb/MobipocketPlugin.cpp
+        fbreader/src/formats/pdb/PalmDocLikePlugin.cpp
+        fbreader/src/formats/pdb/PalmDocLikeStream.cpp
+        fbreader/src/formats/pdb/PalmDocLikeStream.h
+        fbreader/src/formats/pdb/PalmDocPlugin.cpp
+        fbreader/src/formats/pdb/PalmDocStream.cpp
+        fbreader/src/formats/pdb/PalmDocStream.h
+        fbreader/src/formats/pdb/PdbPlugin.cpp
+        fbreader/src/formats/pdb/PdbPlugin.h
+        fbreader/src/formats/pdb/PdbReader.cpp
+        fbreader/src/formats/pdb/PdbReader.h
+        fbreader/src/formats/pdb/PdbStream.cpp
+        fbreader/src/formats/pdb/PdbStream.h
+        fbreader/src/formats/pdb/PluckerBookReader.cpp
+        fbreader/src/formats/pdb/PluckerBookReader.h
+        fbreader/src/formats/pdb/PluckerImages.cpp
+        fbreader/src/formats/pdb/PluckerImages.h
+        fbreader/src/formats/pdb/PluckerPlugin.cpp
+        fbreader/src/formats/pdb/PluckerTextStream.cpp
+        fbreader/src/formats/pdb/PluckerTextStream.h
+        fbreader/src/formats/pdb/PmlBookReader.cpp
+        fbreader/src/formats/pdb/PmlBookReader.h
+        fbreader/src/formats/pdb/PmlReader.cpp
+        fbreader/src/formats/pdb/PmlReader.h
+        fbreader/src/formats/pdb/SimplePdbPlugin.cpp
+        fbreader/src/formats/pdb/ZTXTPlugin.cpp
+        fbreader/src/formats/pdb/ZTXTStream.cpp
+        fbreader/src/formats/pdb/ZTXTStream.h
+        fbreader/src/formats/pdf/PdfBookReader.cpp
+        fbreader/src/formats/pdf/PdfBookReader.h
+        fbreader/src/formats/pdf/PdfDescriptionReader.cpp
+        fbreader/src/formats/pdf/PdfDescriptionReader.h
+        fbreader/src/formats/pdf/PdfObject.cpp
+        fbreader/src/formats/pdf/PdfObject.h
+        fbreader/src/formats/pdf/PdfPlugin.cpp
+        fbreader/src/formats/pdf/PdfPlugin.h
+        fbreader/src/formats/pdf/StringStream.cpp
+        fbreader/src/formats/pdf/StringStream.h
+        fbreader/src/formats/rtf/RtfBookReader.cpp
+        fbreader/src/formats/rtf/RtfBookReader.h
+        fbreader/src/formats/rtf/RtfDescriptionReader.cpp
+        fbreader/src/formats/rtf/RtfDescriptionReader.h
+        fbreader/src/formats/rtf/RtfImage.cpp
+        fbreader/src/formats/rtf/RtfImage.h
+        fbreader/src/formats/rtf/RtfPlugin.cpp
+        fbreader/src/formats/rtf/RtfPlugin.h
+        fbreader/src/formats/rtf/RtfReader.cpp
+        fbreader/src/formats/rtf/RtfReader.h
+        fbreader/src/formats/rtf/RtfReaderStream.cpp
+        fbreader/src/formats/rtf/RtfReaderStream.h
+        fbreader/src/formats/tcr/PPLBookReader.cpp
+        fbreader/src/formats/tcr/PPLBookReader.h
+        fbreader/src/formats/tcr/TcrPlugin.cpp
+        fbreader/src/formats/tcr/TcrPlugin.h
+        fbreader/src/formats/tcr/TcrStream.cpp
+        fbreader/src/formats/tcr/TcrStream.h
+        fbreader/src/formats/txt/PlainTextFormat.cpp
+        fbreader/src/formats/txt/PlainTextFormat.h
+        fbreader/src/formats/txt/TxtBookReader.cpp
+        fbreader/src/formats/txt/TxtBookReader.h
+        fbreader/src/formats/txt/TxtPlugin.cpp
+        fbreader/src/formats/txt/TxtPlugin.h
+        fbreader/src/formats/txt/TxtReader.cpp
+        fbreader/src/formats/txt/TxtReader.h
+        fbreader/src/formats/util/EntityFilesCollector.cpp
+        fbreader/src/formats/util/EntityFilesCollector.h
+        fbreader/src/formats/util/MergedStream.cpp
+        fbreader/src/formats/util/MergedStream.h
+        fbreader/src/formats/util/MiscUtil.cpp
+        fbreader/src/formats/util/MiscUtil.h
+        fbreader/src/formats/util/TextFormatDetector.cpp
+        fbreader/src/formats/util/TextFormatDetector.h
+        fbreader/src/formats/util/XMLTextStream.cpp
+        fbreader/src/formats/util/XMLTextStream.h
+        fbreader/src/formats/xhtml/XHTMLReader.cpp
+        fbreader/src/formats/xhtml/XHTMLReader.h
+        fbreader/src/formats/EncodedTextReader.cpp
+        fbreader/src/formats/EncodedTextReader.h
+        fbreader/src/formats/FormatPlugin.cpp
+        fbreader/src/formats/FormatPlugin.h
+        fbreader/src/formats/PluginCollection.cpp
+        fbreader/src/library/Author.cpp
+        fbreader/src/library/Author.h
+        fbreader/src/library/Book.cpp
+        fbreader/src/library/Book.h
+        fbreader/src/library/Comparators.cpp
+        fbreader/src/library/Library.cpp
+        fbreader/src/library/Library.h
+        fbreader/src/library/Lists.h
+        fbreader/src/library/Tag.cpp
+        fbreader/src/library/Tag.h
+        fbreader/src/libraryActions/AuthorInfoDialog.cpp
+        fbreader/src/libraryActions/AuthorInfoDialog.h
+        fbreader/src/libraryActions/BooksUtil.cpp
+        fbreader/src/libraryActions/BooksUtil.h
+        fbreader/src/libraryActions/LibraryAuthorActions.cpp
+        fbreader/src/libraryActions/LibraryAuthorActions.h
+        fbreader/src/libraryActions/LibraryBookActions.cpp
+        fbreader/src/libraryActions/LibraryBookActions.h
+        fbreader/src/libraryActions/LibraryTagActions.cpp
+        fbreader/src/libraryActions/LibraryTagActions.h
+        fbreader/src/libraryTree/AuthorNode.cpp
+        fbreader/src/libraryTree/BookNode.cpp
+        fbreader/src/libraryTree/LibraryByAuthorView.cpp
+        fbreader/src/libraryTree/LibraryByTagView.cpp
+        fbreader/src/libraryTree/LibraryNodes.h
+        fbreader/src/libraryTree/LibraryView.cpp
+        fbreader/src/libraryTree/LibraryView.h
+        fbreader/src/libraryTree/SeriesNode.cpp
+        fbreader/src/libraryTree/TagNode.cpp
+        fbreader/src/migration/BookInfo.cpp
+        fbreader/src/migration/BookInfo.h
+        fbreader/src/migration/FB2MigrationReader.cpp
+        fbreader/src/migration/FB2MigrationReader.h
+        fbreader/src/migration/HtmlDCTagsReader.cpp
+        fbreader/src/migration/HtmlDCTagsReader.h
+        fbreader/src/migration/migrate.cpp
+        fbreader/src/migration/migrate.h
+        fbreader/src/migration/Migration.cpp
+        fbreader/src/migration/Migration.h
+        fbreader/src/migration/Migration_0_10_4.cpp
+        fbreader/src/migration/Migration_0_11_0.cpp
+        fbreader/src/migration/Migration_0_8_11.cpp
+        fbreader/src/migration/Migration_0_8_13.cpp
+        fbreader/src/migration/Migration_0_8_16.cpp
+        fbreader/src/migration/OEBMigrationReader.cpp
+        fbreader/src/migration/OEBMigrationReader.h
+        fbreader/src/network/atom/ATOMConstructs.cpp
+        fbreader/src/network/atom/ATOMConstructs.h
+        fbreader/src/network/atom/ATOMContainers.cpp
+        fbreader/src/network/atom/ATOMContainers.h
+        fbreader/src/network/atom/ATOMMetadata.cpp
+        fbreader/src/network/atom/ATOMMetadata.h
+        fbreader/src/network/authentication/basic/BasicAuthenticationManager.cpp
+        fbreader/src/network/authentication/basic/BasicAuthenticationManager.h
+        fbreader/src/network/authentication/basic/BasicAuthenticationRequest.cpp
+        fbreader/src/network/authentication/basic/BasicAuthenticationRequest.h
+        fbreader/src/network/authentication/litres/LitResAuthenticationDataParser.cpp
+        fbreader/src/network/authentication/litres/LitResAuthenticationDataParser.h
+        fbreader/src/network/authentication/litres/LitResAuthenticationManager.cpp
+        fbreader/src/network/authentication/litres/LitResAuthenticationManager.h
+        fbreader/src/network/authentication/litres/LitResBookshelfItem.cpp
+        fbreader/src/network/authentication/litres/LitResBookshelfItem.h
+        fbreader/src/network/authentication/litres/LitResDataParser.cpp
+        fbreader/src/network/authentication/litres/LitResDataParser.h
+        fbreader/src/network/authentication/litres/LitResGenre.cpp
+        fbreader/src/network/authentication/litres/LitResGenre.h
+        fbreader/src/network/authentication/litres/LitResGenresParser.cpp
+        fbreader/src/network/authentication/litres/LitResGenresParser.h
+        fbreader/src/network/authentication/litres/LitResUtil.cpp
+        fbreader/src/network/authentication/litres/LitResUtil.h
+        fbreader/src/network/authentication/NetworkAuthenticationManager.cpp
+        fbreader/src/network/authentication/NetworkAuthenticationManager.h
+        fbreader/src/network/opds/NetworkOPDSFeedReader.cpp
+        fbreader/src/network/opds/NetworkOPDSFeedReader.h
+        fbreader/src/network/opds/OPDSCatalogItem.cpp
+        fbreader/src/network/opds/OPDSCatalogItem.h
+        fbreader/src/network/opds/OPDSFeedReader.h
+        fbreader/src/network/opds/OPDSLink.cpp
+        fbreader/src/network/opds/OPDSLink.h
+        fbreader/src/network/opds/OPDSLink_AdvancedSearch.h
+        fbreader/src/network/opds/OPDSLink_Reader.cpp
+        fbreader/src/network/opds/OPDSLink_Reader.h
+        fbreader/src/network/opds/OPDSMetadata.cpp
+        fbreader/src/network/opds/OPDSMetadata.h
+        fbreader/src/network/opds/OPDSXMLParser.cpp
+        fbreader/src/network/opds/OPDSXMLParser.h
+        fbreader/src/network/opds/URLRewritingRule.h
+        fbreader/src/network/BookReference.cpp
+        fbreader/src/network/BookReference.h
+        fbreader/src/network/NetworkBookCollection.cpp
+        fbreader/src/network/NetworkBookCollection.h
+        fbreader/src/network/NetworkBookItem.cpp
+        fbreader/src/network/NetworkCatalogItem.cpp
+        fbreader/src/network/NetworkComparators.cpp
+        fbreader/src/network/NetworkComparators.h
+        fbreader/src/network/NetworkErrors.cpp
+        fbreader/src/network/NetworkErrors.h
+        fbreader/src/network/NetworkItem.cpp
+        fbreader/src/network/NetworkItems.h
+        fbreader/src/network/NetworkLink.cpp
+        fbreader/src/network/NetworkLink.h
+        fbreader/src/network/NetworkLinkCollection.cpp
+        fbreader/src/network/NetworkLinkCollection.h
+        fbreader/src/network/NetworkOperationData.cpp
+        fbreader/src/network/NetworkOperationData.h
+        fbreader/src/network/SearchResult.cpp
+        fbreader/src/network/SearchResult.h
+        fbreader/src/network/UserList.cpp
+        fbreader/src/network/UserList.h
+        fbreader/src/networkActions/AuthenticationDialog.cpp
+        fbreader/src/networkActions/AuthenticationDialog.h
+        fbreader/src/networkActions/NetworkActions.cpp
+        fbreader/src/networkActions/NetworkActions.h
+        fbreader/src/networkActions/NetworkOperationRunnable.cpp
+        fbreader/src/networkActions/NetworkOperationRunnable.h
+        fbreader/src/networkActions/PasswordRecoveryDialog.cpp
+        fbreader/src/networkActions/PasswordRecoveryDialog.h
+        fbreader/src/networkActions/RegisterUserDialog.cpp
+        fbreader/src/networkActions/RegisterUserDialog.h
+        fbreader/src/networkTree/NetworkAuthorNode.cpp
+        fbreader/src/networkTree/NetworkBookNode.cpp
+        fbreader/src/networkTree/NetworkCatalogNode.cpp
+        fbreader/src/networkTree/NetworkCatalogRootNode.cpp
+        fbreader/src/networkTree/NetworkCatalogUtil.cpp
+        fbreader/src/networkTree/NetworkCatalogUtil.h
+        fbreader/src/networkTree/NetworkContainerNode.cpp
+        fbreader/src/networkTree/NetworkNodes.h
+        fbreader/src/networkTree/NetworkNodesFactory.cpp
+        fbreader/src/networkTree/NetworkNodesFactory.h
+        fbreader/src/networkTree/NetworkSeriesNode.cpp
+        fbreader/src/networkTree/NetworkView.cpp
+        fbreader/src/networkTree/NetworkView.h
+        fbreader/src/networkTree/SearchResultNode.cpp
+        fbreader/src/options/FBCategoryKey.cpp
+        fbreader/src/options/FBCategoryKey.h
+        fbreader/src/options/FBOptions.cpp
+        fbreader/src/options/FBOptions.h
+        fbreader/src/options/FBTextStyle.cpp
+        fbreader/src/options/FBTextStyle.h
+        fbreader/src/optionsDialog/bookInfo/BookInfoDialog.cpp
+        fbreader/src/optionsDialog/bookInfo/BookInfoDialog.h
+        fbreader/src/optionsDialog/library/LibraryOptionsDialog.cpp
+        fbreader/src/optionsDialog/library/LibraryOptionsDialog.h
+        fbreader/src/optionsDialog/lookAndFeel/FormatOptionsPage.cpp
+        fbreader/src/optionsDialog/lookAndFeel/FormatOptionsPage.h
+        fbreader/src/optionsDialog/lookAndFeel/LookAndFeelOptionsDialog.cpp
+        fbreader/src/optionsDialog/lookAndFeel/LookAndFeelOptionsDialog.h
+        fbreader/src/optionsDialog/lookAndFeel/OptionsPage.cpp
+        fbreader/src/optionsDialog/lookAndFeel/OptionsPage.h
+        fbreader/src/optionsDialog/lookAndFeel/StyleOptionsPage.cpp
+        fbreader/src/optionsDialog/lookAndFeel/StyleOptionsPage.h
+        fbreader/src/optionsDialog/network/NetworkOptionsDialog.cpp
+        fbreader/src/optionsDialog/network/NetworkOptionsDialog.h
+        fbreader/src/optionsDialog/reading/IndicatorTab.cpp
+        fbreader/src/optionsDialog/reading/KeyBindingsTab.cpp
+        fbreader/src/optionsDialog/reading/ReadingOptionsDialog.cpp
+        fbreader/src/optionsDialog/reading/ReadingOptionsDialog.h
+        fbreader/src/optionsDialog/system/SystemOptionsDialog.cpp
+        fbreader/src/optionsDialog/system/SystemOptionsDialog.h
+        fbreader/src/optionsDialog/AbstractOptionsDialog.cpp
+        fbreader/src/optionsDialog/AbstractOptionsDialog.h
+        fbreader/src/optionsDialog/IntegrationTab.cpp
+        libs/macosx/include/fribidi/fribidi.h
+        libs/macosx/include/fribidi/fribidi_char_sets.h
+        libs/macosx/include/fribidi/fribidi_char_sets.i
+        libs/macosx/include/fribidi/fribidi_char_sets_cap_rtl.h
+        libs/macosx/include/fribidi/fribidi_char_sets_cp1255.h
+        libs/macosx/include/fribidi/fribidi_char_sets_cp1256.h
+        libs/macosx/include/fribidi/fribidi_char_sets_isiri_3342.h
+        libs/macosx/include/fribidi/fribidi_char_sets_iso8859_6.h
+        libs/macosx/include/fribidi/fribidi_char_sets_iso8859_8.h
+        libs/macosx/include/fribidi/fribidi_char_sets_utf8.h
+        libs/macosx/include/fribidi/fribidi_config.h
+        libs/macosx/include/fribidi/fribidi_types.h
+        libs/macosx/include/fribidi/fribidi_types.i
+        libs/macosx/include/fribidi/fribidi_unicode.h
+        libs/macosx/include/linebreak.h
+        tools/StatisticsGenerator/detector.cpp
+        tools/StatisticsGenerator/generator.cpp
+        tools/StatisticsGenerator/pattern.cpp
+        tools/StatisticsGenerator/rtfInputStreamTest.cpp
+        trash/fbreader-test/ModelTest.cpp
+        zlibrary/core/src/application/ZLApplication.cpp
+        zlibrary/core/src/application/ZLApplication.h
+        zlibrary/core/src/application/ZLApplicationActions.cpp
+        zlibrary/core/src/application/ZLApplicationBase.cpp
+        zlibrary/core/src/application/ZLApplicationWindow.cpp
+        zlibrary/core/src/application/ZLApplicationWindow.h
+        zlibrary/core/src/application/ZLKeyBindings.cpp
+        zlibrary/core/src/application/ZLKeyBindings.h
+        zlibrary/core/src/application/ZLMenu.cpp
+        zlibrary/core/src/application/ZLMenu.h
+        zlibrary/core/src/application/ZLPopupData.h
+        zlibrary/core/src/application/ZLToolbar.cpp
+        zlibrary/core/src/application/ZLToolbar.h
+        zlibrary/core/src/blockTreeView/ZLBlockTreeNode.cpp
+        zlibrary/core/src/blockTreeView/ZLBlockTreeNode.h
+        zlibrary/core/src/blockTreeView/ZLBlockTreeView.cpp
+        zlibrary/core/src/blockTreeView/ZLBlockTreeView.h
+        zlibrary/core/src/constants/ZLMimeType.cpp
+        zlibrary/core/src/constants/ZLMimeType.h
+        zlibrary/core/src/constants/ZLXMLNamespace.cpp
+        zlibrary/core/src/constants/ZLXMLNamespace.h
+        zlibrary/core/src/desktop/application/ZLDesktopApplicationWindow.cpp
+        zlibrary/core/src/desktop/application/ZLDesktopApplicationWindow.h
+        zlibrary/core/src/desktop/dialogs/ZLDesktopOpenFileDialog.cpp
+        zlibrary/core/src/desktop/dialogs/ZLDesktopOpenFileDialog.h
+        zlibrary/core/src/desktop/dialogs/ZLDesktopOptionsDialog.cpp
+        zlibrary/core/src/desktop/dialogs/ZLDesktopOptionsDialog.h
+        zlibrary/core/src/dialogs/ZLDialog.cpp
+        zlibrary/core/src/dialogs/ZLDialog.h
+        zlibrary/core/src/dialogs/ZLDialogContent.cpp
+        zlibrary/core/src/dialogs/ZLDialogContent.h
+        zlibrary/core/src/dialogs/ZLDialogContentBuilder.cpp
+        zlibrary/core/src/dialogs/ZLDialogContentBuilder.h
+        zlibrary/core/src/dialogs/ZLDialogManager.cpp
+        zlibrary/core/src/dialogs/ZLDialogManager.h
+        zlibrary/core/src/dialogs/ZLOpenFileDialog.cpp
+        zlibrary/core/src/dialogs/ZLOpenFileDialog.h
+        zlibrary/core/src/dialogs/ZLOptionEntry.cpp
+        zlibrary/core/src/dialogs/ZLOptionEntry.h
+        zlibrary/core/src/dialogs/ZLOptionsDialog.cpp
+        zlibrary/core/src/dialogs/ZLOptionsDialog.h
+        zlibrary/core/src/dialogs/ZLOptionView.cpp
+        zlibrary/core/src/dialogs/ZLOptionView.h
+        zlibrary/core/src/dialogs/ZLProgressDialog.cpp
+        zlibrary/core/src/dialogs/ZLProgressDialog.h
+        zlibrary/core/src/encoding/DummyEncodingConverter.cpp
+        zlibrary/core/src/encoding/DummyEncodingConverter.h
+        zlibrary/core/src/encoding/EncodingCollectionReader.cpp
+        zlibrary/core/src/encoding/EncodingCollectionReader.h
+        zlibrary/core/src/encoding/MyEncodingConverter.cpp
+        zlibrary/core/src/encoding/MyEncodingConverter.h
+        zlibrary/core/src/encoding/ZLEncodingCollection.cpp
+        zlibrary/core/src/encoding/ZLEncodingConverter.cpp
+        zlibrary/core/src/encoding/ZLEncodingConverter.h
+        zlibrary/core/src/encoding/ZLEncodingConverterProvider.h
+        zlibrary/core/src/encoding/ZLEncodingSet.cpp
+        zlibrary/core/src/filesystem/bzip2/ZLBzip2InputStream.cpp
+        zlibrary/core/src/filesystem/bzip2/ZLBzip2InputStream.h
+        zlibrary/core/src/filesystem/tar/ZLTar.cpp
+        zlibrary/core/src/filesystem/tar/ZLTar.h
+        zlibrary/core/src/filesystem/zip/ZLGzipInputStream.cpp
+        zlibrary/core/src/filesystem/zip/ZLZDecompressor.cpp
+        zlibrary/core/src/filesystem/zip/ZLZDecompressor.h
+        zlibrary/core/src/filesystem/zip/ZLZip.h
+        zlibrary/core/src/filesystem/zip/ZLZipDir.cpp
+        zlibrary/core/src/filesystem/zip/ZLZipEntryCache.cpp
+        zlibrary/core/src/filesystem/zip/ZLZipHeader.cpp
+        zlibrary/core/src/filesystem/zip/ZLZipHeader.h
+        zlibrary/core/src/filesystem/zip/ZLZipInputStream.cpp
+        zlibrary/core/src/filesystem/ZLDir.cpp
+        zlibrary/core/src/filesystem/ZLDir.h
+        zlibrary/core/src/filesystem/ZLFile.cpp
+        zlibrary/core/src/filesystem/ZLFile.h
+        zlibrary/core/src/filesystem/ZLFileInfo.h
+        zlibrary/core/src/filesystem/ZLFSDir.h
+        zlibrary/core/src/filesystem/ZLFSManager.cpp
+        zlibrary/core/src/filesystem/ZLFSManager.h
+        zlibrary/core/src/filesystem/ZLInputStream.h
+        zlibrary/core/src/filesystem/ZLInputStreamDecorator.cpp
+        zlibrary/core/src/filesystem/ZLOutputStream.h
+        zlibrary/core/src/image/ZLBase64EncodedImage.cpp
+        zlibrary/core/src/image/ZLBase64EncodedImage.h
+        zlibrary/core/src/image/ZLFileImage.cpp
+        zlibrary/core/src/image/ZLFileImage.h
+        zlibrary/core/src/image/ZLImage.cpp
+        zlibrary/core/src/image/ZLImage.h
+        zlibrary/core/src/image/ZLImageManager.cpp
+        zlibrary/core/src/image/ZLImageManager.h
+        zlibrary/core/src/image/ZLNetworkImage.cpp
+        zlibrary/core/src/image/ZLNetworkImage.h
+        zlibrary/core/src/image/ZLStreamImage.cpp
+        zlibrary/core/src/image/ZLStreamImage.h
+        zlibrary/core/src/language/ZLCharSequence.cpp
+        zlibrary/core/src/language/ZLCharSequence.h
+        zlibrary/core/src/language/ZLLanguageDetector.cpp
+        zlibrary/core/src/language/ZLLanguageDetector.h
+        zlibrary/core/src/language/ZLLanguageList.cpp
+        zlibrary/core/src/language/ZLLanguageList.h
+        zlibrary/core/src/language/ZLLanguageMatcher.cpp
+        zlibrary/core/src/language/ZLLanguageMatcher.h
+        zlibrary/core/src/language/ZLStatistics.cpp
+        zlibrary/core/src/language/ZLStatistics.h
+        zlibrary/core/src/language/ZLStatisticsGenerator.cpp
+        zlibrary/core/src/language/ZLStatisticsGenerator.h
+        zlibrary/core/src/language/ZLStatisticsItem.cpp
+        zlibrary/core/src/language/ZLStatisticsItem.h
+        zlibrary/core/src/language/ZLStatisticsXMLReader.cpp
+        zlibrary/core/src/language/ZLStatisticsXMLReader.h
+        zlibrary/core/src/language/ZLStatisticsXMLWriter.cpp
+        zlibrary/core/src/language/ZLStatisticsXMLWriter.h
+        zlibrary/core/src/library/ZLibrary.cpp
+        zlibrary/core/src/library/ZLibrary.h
+        zlibrary/core/src/logger/ZLLogger.cpp
+        zlibrary/core/src/logger/ZLLogger.h
+        zlibrary/core/src/message/ZLMessage.cpp
+        zlibrary/core/src/message/ZLMessage.h
+        zlibrary/core/src/network/requests/ZLNetworkDownloadRequest.cpp
+        zlibrary/core/src/network/requests/ZLNetworkDownloadRequest.h
+        zlibrary/core/src/network/requests/ZLNetworkNoActionRequest.cpp
+        zlibrary/core/src/network/requests/ZLNetworkNoActionRequest.h
+        zlibrary/core/src/network/requests/ZLNetworkReadToStringRequest.cpp
+        zlibrary/core/src/network/requests/ZLNetworkReadToStringRequest.h
+        zlibrary/core/src/network/requests/ZLNetworkXMLParserRequest.cpp
+        zlibrary/core/src/network/requests/ZLNetworkXMLParserRequest.h
+        zlibrary/core/src/network/ZLAsynchronousInputStream.cpp
+        zlibrary/core/src/network/ZLAsynchronousInputStream.h
+        zlibrary/core/src/network/ZLGzipAsynchronousInputStream.cpp
+        zlibrary/core/src/network/ZLGzipAsynchronousInputStream.h
+        zlibrary/core/src/network/ZLNetworkManager.cpp
+        zlibrary/core/src/network/ZLNetworkManager.h
+        zlibrary/core/src/network/ZLNetworkRequest.cpp
+        zlibrary/core/src/network/ZLNetworkRequest.h
+        zlibrary/core/src/network/ZLNetworkSSLCertificate.cpp
+        zlibrary/core/src/network/ZLNetworkSSLCertificate.h
+        zlibrary/core/src/network/ZLNetworkUtil.cpp
+        zlibrary/core/src/network/ZLNetworkUtil.h
+        zlibrary/core/src/network/ZLPlainAsynchronousInputStream.cpp
+        zlibrary/core/src/network/ZLPlainAsynchronousInputStream.h
+        zlibrary/core/src/optionEntries/ZLColorOptionBuilder.cpp
+        zlibrary/core/src/optionEntries/ZLColorOptionBuilder.h
+        zlibrary/core/src/optionEntries/ZLFontFamilyOptionEntry.cpp
+        zlibrary/core/src/optionEntries/ZLFontFamilyOptionEntry.h
+        zlibrary/core/src/optionEntries/ZLLanguageOptionEntry.cpp
+        zlibrary/core/src/optionEntries/ZLLanguageOptionEntry.h
+        zlibrary/core/src/optionEntries/ZLSimpleKeyOptionEntry.cpp
+        zlibrary/core/src/optionEntries/ZLSimpleKeyOptionEntry.h
+        zlibrary/core/src/optionEntries/ZLSimpleOptionEntry.cpp
+        zlibrary/core/src/optionEntries/ZLSimpleOptionEntry.h
+        zlibrary/core/src/optionEntries/ZLStringEditOptionEntry.cpp
+        zlibrary/core/src/optionEntries/ZLStringEditOptionEntry.h
+        zlibrary/core/src/optionEntries/ZLStringInfoEntry.cpp
+        zlibrary/core/src/optionEntries/ZLStringInfoEntry.h
+        zlibrary/core/src/optionEntries/ZLToggleBooleanOptionEntry.cpp
+        zlibrary/core/src/optionEntries/ZLToggleBooleanOptionEntry.h
+        zlibrary/core/src/options/ZLCategoryKey.cpp
+        zlibrary/core/src/options/ZLConfig.cpp
+        zlibrary/core/src/options/ZLConfig.h
+        zlibrary/core/src/options/ZLOptions.cpp
+        zlibrary/core/src/options/ZLOptions.h
+        zlibrary/core/src/resources/ZLResource.cpp
+        zlibrary/core/src/resources/ZLResource.h
+        zlibrary/core/src/runnable/ZLExecutionData.cpp
+        zlibrary/core/src/runnable/ZLExecutionData.h
+        zlibrary/core/src/runnable/ZLRunnable.cpp
+        zlibrary/core/src/runnable/ZLRunnable.h
+        zlibrary/core/src/time/ZLTime.cpp
+        zlibrary/core/src/time/ZLTime.h
+        zlibrary/core/src/time/ZLTimeManager.cpp
+        zlibrary/core/src/time/ZLTimeManager.h
+        zlibrary/core/src/typeId/ZLTypeId.cpp
+        zlibrary/core/src/typeId/ZLTypeId.h
+        zlibrary/core/src/unix/curl/ZLCurlNetworkManager.cpp
+        zlibrary/core/src/unix/curl/ZLCurlNetworkManager.h
+        zlibrary/core/src/unix/filesystem/ZLUnixFileInputStream.cpp
+        zlibrary/core/src/unix/filesystem/ZLUnixFileInputStream.h
+        zlibrary/core/src/unix/filesystem/ZLUnixFileOutputStream.cpp
+        zlibrary/core/src/unix/filesystem/ZLUnixFileOutputStream.h
+        zlibrary/core/src/unix/filesystem/ZLUnixFSDir.cpp
+        zlibrary/core/src/unix/filesystem/ZLUnixFSDir.h
+        zlibrary/core/src/unix/filesystem/ZLUnixFSManager.cpp
+        zlibrary/core/src/unix/filesystem/ZLUnixFSManager.h
+        zlibrary/core/src/unix/iconv/IConvEncodingConverter.cpp
+        zlibrary/core/src/unix/iconv/IConvEncodingConverter.h
+        zlibrary/core/src/unix/library/ZLibrary.cpp
+        zlibrary/core/src/unix/library/ZLibraryImplementation.h
+        zlibrary/core/src/unix/time/ZLUnixTime.cpp
+        zlibrary/core/src/unix/time/ZLUnixTime.h
+        zlibrary/core/src/unix/xmlconfig/AsciiEncoder.cpp
+        zlibrary/core/src/unix/xmlconfig/AsciiEncoder.h
+        zlibrary/core/src/unix/xmlconfig/XMLConfig.cpp
+        zlibrary/core/src/unix/xmlconfig/XMLConfig.h
+        zlibrary/core/src/unix/xmlconfig/XMLConfigDelta.cpp
+        zlibrary/core/src/unix/xmlconfig/XMLConfigDelta.h
+        zlibrary/core/src/unix/xmlconfig/XMLConfigDeltaWriter.cpp
+        zlibrary/core/src/unix/xmlconfig/XMLConfigDeltaWriter.h
+        zlibrary/core/src/unix/xmlconfig/XMLConfigIO.cpp
+        zlibrary/core/src/unix/xmlconfig/XMLConfigReader.cpp
+        zlibrary/core/src/unix/xmlconfig/XMLConfigReader.h
+        zlibrary/core/src/unix/xmlconfig/XMLConfigValue.h
+        zlibrary/core/src/unix/xmlconfig/XMLConfigWriter.cpp
+        zlibrary/core/src/unix/xmlconfig/XMLConfigWriter.h
+        zlibrary/core/src/util/allocator.h
+        zlibrary/core/src/util/shared_ptr.h
+        zlibrary/core/src/util/ZLBoolean3.h
+        zlibrary/core/src/util/ZLColor.h
+        zlibrary/core/src/util/ZLFileUtil.cpp
+        zlibrary/core/src/util/ZLFileUtil.h
+        zlibrary/core/src/util/ZLKeyUtil.cpp
+        zlibrary/core/src/util/ZLKeyUtil.h
+        zlibrary/core/src/util/ZLLanguageUtil.cpp
+        zlibrary/core/src/util/ZLLanguageUtil.h
+        zlibrary/core/src/util/ZLSearchUtil.cpp
+        zlibrary/core/src/util/ZLSearchUtil.h
+        zlibrary/core/src/util/ZLStringUtil.cpp
+        zlibrary/core/src/util/ZLStringUtil.h
+        zlibrary/core/src/util/ZLUnicodeUtil.cpp
+        zlibrary/core/src/util/ZLUnicodeUtil.h
+        zlibrary/core/src/util/ZLUserData.cpp
+        zlibrary/core/src/util/ZLUserData.h
+        zlibrary/core/src/view/ZLMirroredPaintContext.cpp
+        zlibrary/core/src/view/ZLMirroredPaintContext.h
+        zlibrary/core/src/view/ZLPaintContext.cpp
+        zlibrary/core/src/view/ZLPaintContext.h
+        zlibrary/core/src/view/ZLView.cpp
+        zlibrary/core/src/view/ZLView.h
+        zlibrary/core/src/view/ZLViewWidget.h
+        zlibrary/core/src/win32/config/RegistryUtil.cpp
+        zlibrary/core/src/win32/config/StringEncoder.cpp
+        zlibrary/core/src/win32/config/StringEncoder.h
+        zlibrary/core/src/win32/config/ZLWin32Config.cpp
+        zlibrary/core/src/win32/config/ZLWin32Config.h
+        zlibrary/core/src/win32/config/ZLWin32ConfigIO.cpp
+        zlibrary/core/src/win32/config/ZLWin32ConfigValue.h
+        zlibrary/core/src/win32/encoding/ZLWin32EncodingConverter.cpp
+        zlibrary/core/src/win32/encoding/ZLWin32EncodingConverter.h
+        zlibrary/core/src/win32/filesystem/ZLWin32FileInputStream.cpp
+        zlibrary/core/src/win32/filesystem/ZLWin32FileInputStream.h
+        zlibrary/core/src/win32/filesystem/ZLWin32FileOutputStream.cpp
+        zlibrary/core/src/win32/filesystem/ZLWin32FileOutputStream.h
+        zlibrary/core/src/win32/filesystem/ZLWin32FSDir.cpp
+        zlibrary/core/src/win32/filesystem/ZLWin32FSDir.h
+        zlibrary/core/src/win32/filesystem/ZLWin32FSManager.cpp
+        zlibrary/core/src/win32/filesystem/ZLWin32FSManager.h
+        zlibrary/core/src/win32/filesystem/ZLWin32RootDir.cpp
+        zlibrary/core/src/win32/filesystem/ZLWin32RootDir.h
+        zlibrary/core/src/win32/util/W32WCHARUtil.h
+        zlibrary/core/src/xml/expat/ZLXMLReaderInternal.cpp
+        zlibrary/core/src/xml/expat/ZLXMLReaderInternal.h
+        zlibrary/core/src/xml/ZLXMLReader.cpp
+        zlibrary/core/src/xml/ZLXMLReader.h
+        zlibrary/core/src/xml/ZLXMLWriter.cpp
+        zlibrary/core/src/xml/ZLXMLWriter.h
+        zlibrary/text/src/area/ZLTextArea.cpp
+        zlibrary/text/src/area/ZLTextArea.h
+        zlibrary/text/src/area/ZLTextArea_drawTextLine.cpp
+        zlibrary/text/src/area/ZLTextArea_drawTreeLines.cpp
+        zlibrary/text/src/area/ZLTextArea_drawWord.cpp
+        zlibrary/text/src/area/ZLTextArea_prepareTextLine.cpp
+        zlibrary/text/src/area/ZLTextArea_processTextLine.cpp
+        zlibrary/text/src/area/ZLTextAreaController.cpp
+        zlibrary/text/src/area/ZLTextAreaController.h
+        zlibrary/text/src/area/ZLTextAreaStyle.cpp
+        zlibrary/text/src/area/ZLTextAreaStyle.h
+        zlibrary/text/src/area/ZLTextElement.cpp
+        zlibrary/text/src/area/ZLTextElement.h
+        zlibrary/text/src/area/ZLTextLineInfo.h
+        zlibrary/text/src/area/ZLTextParagraphBuilder.cpp
+        zlibrary/text/src/area/ZLTextParagraphBuilder.h
+        zlibrary/text/src/area/ZLTextParagraphCursor.cpp
+        zlibrary/text/src/area/ZLTextParagraphCursor.h
+        zlibrary/text/src/area/ZLTextRectangle.h
+        zlibrary/text/src/area/ZLTextSelectionModel.cpp
+        zlibrary/text/src/area/ZLTextSelectionModel.h
+        zlibrary/text/src/area/ZLTextWord.cpp
+        zlibrary/text/src/area/ZLTextWord.h
+        zlibrary/text/src/hyphenation/ZLTextHyphenationReader.cpp
+        zlibrary/text/src/hyphenation/ZLTextHyphenationReader.h
+        zlibrary/text/src/hyphenation/ZLTextHyphenator.cpp
+        zlibrary/text/src/hyphenation/ZLTextHyphenator.h
+        zlibrary/text/src/hyphenation/ZLTextTeXHyphenator.cpp
+        zlibrary/text/src/hyphenation/ZLTextTeXHyphenator.h
+        zlibrary/text/src/model/ZLTextAlignmentType.h
+        zlibrary/text/src/model/ZLTextFontModifier.h
+        zlibrary/text/src/model/ZLTextKind.h
+        zlibrary/text/src/model/ZLTextMark.h
+        zlibrary/text/src/model/ZLTextModel.cpp
+        zlibrary/text/src/model/ZLTextModel.h
+        zlibrary/text/src/model/ZLTextParagraph.cpp
+        zlibrary/text/src/model/ZLTextParagraph.h
+        zlibrary/text/src/model/ZLTextRowMemoryAllocator.cpp
+        zlibrary/text/src/model/ZLTextRowMemoryAllocator.h
+        zlibrary/text/src/style/ZLTextDecoratedStyle.cpp
+        zlibrary/text/src/style/ZLTextDecoratedStyle.h
+        zlibrary/text/src/style/ZLTextStyle.cpp
+        zlibrary/text/src/style/ZLTextStyle.h
+        zlibrary/text/src/style/ZLTextStyleCollection.cpp
+        zlibrary/text/src/style/ZLTextStyleCollection.h
+        zlibrary/text/src/styleOptions/ZLTextStyleOptions.cpp
+        zlibrary/text/src/styleOptions/ZLTextStyleOptions.h
+        zlibrary/text/src/view/ZLTextPositionIndicator.cpp
+        zlibrary/text/src/view/ZLTextPositionIndicator.h
+        zlibrary/text/src/view/ZLTextPositionIndicatorInfo.h
+        zlibrary/text/src/view/ZLTextSelectionScroller.cpp
+        zlibrary/text/src/view/ZLTextSelectionScroller.h
+        zlibrary/text/src/view/ZLTextView.cpp
+        zlibrary/text/src/view/ZLTextView.h
+        zlibrary/text/src/view/ZLTextView_paint.cpp
+        zlibrary/ui/src/cocoa/application/CocoaWindow.h
+        zlibrary/ui/src/cocoa/application/CocoaWindow.M
+        zlibrary/ui/src/cocoa/application/ZLCocoaApplicationWindow.h
+        zlibrary/ui/src/cocoa/application/ZLCocoaApplicationWindow.M
+        zlibrary/ui/src/cocoa/application/ZLCocoaToolbarDelegate.h
+        zlibrary/ui/src/cocoa/application/ZLCocoaToolbarDelegate.M
+        zlibrary/ui/src/cocoa/dialogs/ZLCocoaDialogManager.h
+        zlibrary/ui/src/cocoa/dialogs/ZLCocoaDialogManager.M
+        zlibrary/ui/src/cocoa/dialogs/ZLCocoaOpenFileDialog.h
+        zlibrary/ui/src/cocoa/dialogs/ZLCocoaOpenFileDialog.M
+        zlibrary/ui/src/cocoa/dialogs/ZLCocoaProgressDialog.h
+        zlibrary/ui/src/cocoa/dialogs/ZLCocoaProgressDialog.M
+        zlibrary/ui/src/cocoa/filesystem/ZLCocoaFSManager.h
+        zlibrary/ui/src/cocoa/filesystem/ZLCocoaFSManager.M
+        zlibrary/ui/src/cocoa/image/ZLCocoaImageManager.h
+        zlibrary/ui/src/cocoa/image/ZLCocoaImageManager.M
+        zlibrary/ui/src/cocoa/library/ZLCocoaAppDelegate.h
+        zlibrary/ui/src/cocoa/library/ZLCocoaAppDelegate.M
+        zlibrary/ui/src/cocoa/library/ZLibrary.M
+        zlibrary/ui/src/cocoa/message/ZLCocoaMessage.h
+        zlibrary/ui/src/cocoa/message/ZLCocoaMessage.M
+        zlibrary/ui/src/cocoa/time/ZLCocoaTimeManager.h
+        zlibrary/ui/src/cocoa/time/ZLCocoaTimeManager.M
+        zlibrary/ui/src/cocoa/util/ZLCocoaKeyUtil.h
+        zlibrary/ui/src/cocoa/util/ZLCocoaKeyUtil.M
+        zlibrary/ui/src/cocoa/view/CocoaView.h
+        zlibrary/ui/src/cocoa/view/CocoaView.M
+        zlibrary/ui/src/cocoa/view/ZLCocoaPaintContext.h
+        zlibrary/ui/src/cocoa/view/ZLCocoaPaintContext.M
+        zlibrary/ui/src/cocoa/view/ZLCocoaViewWidget.h
+        zlibrary/ui/src/cocoa/view/ZLCocoaViewWidget.M
+        zlibrary/ui/src/ezx/application/ZLQtApplicationWindow.cpp
+        zlibrary/ui/src/ezx/application/ZLQtApplicationWindow.h
+        zlibrary/ui/src/ezx/application/ZLQtMenuAction.h
+        zlibrary/ui/src/ezx/dialogs/ZLFullScreenDialog.cpp
+        zlibrary/ui/src/ezx/dialogs/ZLFullScreenDialog.h
+        zlibrary/ui/src/ezx/dialogs/ZLQtDialog.cpp
+        zlibrary/ui/src/ezx/dialogs/ZLQtDialog.h
+        zlibrary/ui/src/ezx/dialogs/ZLQtDialogContent.cpp
+        zlibrary/ui/src/ezx/dialogs/ZLQtDialogContent.h
+        zlibrary/ui/src/ezx/dialogs/ZLQtDialogManager.cpp
+        zlibrary/ui/src/ezx/dialogs/ZLQtDialogManager.h
+        zlibrary/ui/src/ezx/dialogs/ZLQtOptionsDialog.cpp
+        zlibrary/ui/src/ezx/dialogs/ZLQtOptionsDialog.h
+        zlibrary/ui/src/ezx/dialogs/ZLQtSelectionDialog.cpp
+        zlibrary/ui/src/ezx/dialogs/ZLQtSelectionDialog.h
+        zlibrary/ui/src/ezx/dialogs/ZLQtUtil.cpp
+        zlibrary/ui/src/ezx/dialogs/ZLQtUtil.h
+        zlibrary/ui/src/ezx/library/ZLibrary.cpp
+        zlibrary/ui/src/ezx/optionView/ZLQtOptionView.cpp
+        zlibrary/ui/src/ezx/optionView/ZLQtOptionView.h
+        zlibrary/ui/src/ezx/optionView/ZLQtOptionViewHolder.cpp
+        zlibrary/ui/src/ezx/optionView/ZLQtOptionViewHolder.h
+        zlibrary/ui/src/ezx/view/ZLQtPaintContext.cpp
+        zlibrary/ui/src/ezx/view/ZLQtPaintContext.h
+        zlibrary/ui/src/ezx/view/ZLQtViewWidget.cpp
+        zlibrary/ui/src/ezx/view/ZLQtViewWidget.h
+        zlibrary/ui/src/gpe/application/ZLGtkApplicationWindow.cpp
+        zlibrary/ui/src/gpe/application/ZLGtkApplicationWindow.h
+        zlibrary/ui/src/gpe/dialogs/ZLGtkDialog.cpp
+        zlibrary/ui/src/gpe/dialogs/ZLGtkDialog.h
+        zlibrary/ui/src/gpe/dialogs/ZLGtkDialogContent.cpp
+        zlibrary/ui/src/gpe/dialogs/ZLGtkDialogContent.h
+        zlibrary/ui/src/gpe/dialogs/ZLGtkDialogManager.cpp
+        zlibrary/ui/src/gpe/dialogs/ZLGtkDialogManager.h
+        zlibrary/ui/src/gpe/dialogs/ZLGtkOptionsDialog.cpp
+        zlibrary/ui/src/gpe/dialogs/ZLGtkOptionsDialog.h
+        zlibrary/ui/src/gpe/dialogs/ZLGtkOptionView.cpp
+        zlibrary/ui/src/gpe/dialogs/ZLGtkOptionView.h
+        zlibrary/ui/src/gpe/dialogs/ZLGtkSelectionDialog.cpp
+        zlibrary/ui/src/gpe/dialogs/ZLGtkSelectionDialog.h
+        zlibrary/ui/src/gpe/dialogs/ZLGtkUtil.cpp
+        zlibrary/ui/src/gpe/dialogs/ZLGtkUtil.h
+        zlibrary/ui/src/gpe/dialogs/ZLGtkWaitMessage.cpp
+        zlibrary/ui/src/gpe/dialogs/ZLGtkWaitMessage.h
+        zlibrary/ui/src/gpe/library/ZLibrary.cpp
+        zlibrary/ui/src/gpe/view/ZLGtkPaintContext.cpp
+        zlibrary/ui/src/gpe/view/ZLGtkPaintContext.h
+        zlibrary/ui/src/gpe/view/ZLGtkViewWidget.cpp
+        zlibrary/ui/src/gpe/view/ZLGtkViewWidget.h
+        zlibrary/ui/src/gtk/application-desktop/GtkEntryParameter.cpp
+        zlibrary/ui/src/gtk/application-desktop/Toolbar.cpp
+        zlibrary/ui/src/gtk/application-desktop/ZLGtkApplicationWindow.cpp
+        zlibrary/ui/src/gtk/application-desktop/ZLGtkApplicationWindow.h
+        zlibrary/ui/src/gtk/application-pdaxrom/ZLGtkApplicationWindow.cpp
+        zlibrary/ui/src/gtk/application-pdaxrom/ZLGtkApplicationWindow.h
+        zlibrary/ui/src/gtk/dialogs/ZLGtkDialog.cpp
+        zlibrary/ui/src/gtk/dialogs/ZLGtkDialog.h
+        zlibrary/ui/src/gtk/dialogs/ZLGtkDialogContent.cpp
+        zlibrary/ui/src/gtk/dialogs/ZLGtkDialogContent.h
+        zlibrary/ui/src/gtk/dialogs/ZLGtkDialogManager.cpp
+        zlibrary/ui/src/gtk/dialogs/ZLGtkDialogManager.h
+        zlibrary/ui/src/gtk/dialogs/ZLGtkOpenFileDialog.cpp
+        zlibrary/ui/src/gtk/dialogs/ZLGtkOpenFileDialog.h
+        zlibrary/ui/src/gtk/dialogs/ZLGtkOptionsDialog.cpp
+        zlibrary/ui/src/gtk/dialogs/ZLGtkOptionsDialog.h
+        zlibrary/ui/src/gtk/dialogs/ZLGtkProgressDialog.cpp
+        zlibrary/ui/src/gtk/dialogs/ZLGtkProgressDialog.h
+        zlibrary/ui/src/gtk/dialogs/ZLGtkUtil.cpp
+        zlibrary/ui/src/gtk/dialogs/ZLGtkUtil.h
+        zlibrary/ui/src/gtk/filesystem/ZLGtkFSManager.cpp
+        zlibrary/ui/src/gtk/filesystem/ZLGtkFSManager.h
+        zlibrary/ui/src/gtk/image/ZLGtkImageManager.cpp
+        zlibrary/ui/src/gtk/image/ZLGtkImageManager.h
+        zlibrary/ui/src/gtk/library/ZLibrary.cpp
+        zlibrary/ui/src/gtk/optionView/ZLGtkOptionView.cpp
+        zlibrary/ui/src/gtk/optionView/ZLGtkOptionView.h
+        zlibrary/ui/src/gtk/optionView/ZLGtkOptionViewHolder.cpp
+        zlibrary/ui/src/gtk/optionView/ZLGtkOptionViewHolder.h
+        zlibrary/ui/src/gtk/pixbuf/ZLGtkPixbufHack.cpp
+        zlibrary/ui/src/gtk/pixbuf/ZLGtkPixbufHack.h
+        zlibrary/ui/src/gtk/time/ZLGtkTime.cpp
+        zlibrary/ui/src/gtk/time/ZLGtkTime.h
+        zlibrary/ui/src/gtk/util/ZLGtkKeyUtil.cpp
+        zlibrary/ui/src/gtk/util/ZLGtkKeyUtil.h
+        zlibrary/ui/src/gtk/util/ZLGtkSignalUtil.cpp
+        zlibrary/ui/src/gtk/util/ZLGtkSignalUtil.h
+        zlibrary/ui/src/gtk/view/ZLGtkPaintContext.cpp
+        zlibrary/ui/src/gtk/view/ZLGtkPaintContext.h
+        zlibrary/ui/src/gtk/view/ZLGtkViewWidget.cpp
+        zlibrary/ui/src/gtk/view/ZLGtkViewWidget.h
+        zlibrary/ui/src/iphone/application/ZLCocoaApplicationWindow.h
+        zlibrary/ui/src/iphone/application/ZLCocoaApplicationWindow.M
+        zlibrary/ui/src/iphone/dialogs/ZLCocoaDialogManager.cpp
+        zlibrary/ui/src/iphone/dialogs/ZLCocoaDialogManager.h
+        zlibrary/ui/src/iphone/filesystem/ZLCocoaFSManager.h
+        zlibrary/ui/src/iphone/filesystem/ZLCocoaFSManager.M
+        zlibrary/ui/src/iphone/image/ZLCocoaImageManager.h
+        zlibrary/ui/src/iphone/image/ZLCocoaImageManager.M
+        zlibrary/ui/src/iphone/library/ZLCocoaAppDelegate.h
+        zlibrary/ui/src/iphone/library/ZLCocoaAppDelegate.M
+        zlibrary/ui/src/iphone/library/ZLibrary.M
+        zlibrary/ui/src/iphone/time/ZLCocoaTimeManager.h
+        zlibrary/ui/src/iphone/time/ZLCocoaTimeManager.M
+        zlibrary/ui/src/iphone/view/CocoaView.h
+        zlibrary/ui/src/iphone/view/CocoaView.M
+        zlibrary/ui/src/iphone/view/ZLCocoaPaintContext.h
+        zlibrary/ui/src/iphone/view/ZLCocoaPaintContext.M
+        zlibrary/ui/src/iphone/view/ZLCocoaViewWidget.cpp
+        zlibrary/ui/src/iphone/view/ZLCocoaViewWidget.h
+        zlibrary/ui/src/maemo/application/GtkEntryParameter.cpp
+        zlibrary/ui/src/maemo/application/ZLGtkApplicationWindow.cpp
+        zlibrary/ui/src/maemo/application/ZLGtkApplicationWindow.h
+        zlibrary/ui/src/maemo/dialogs/ZLGtkDialog.cpp
+        zlibrary/ui/src/maemo/dialogs/ZLGtkDialog.h
+        zlibrary/ui/src/maemo/dialogs/ZLGtkDialogContent.cpp
+        zlibrary/ui/src/maemo/dialogs/ZLGtkDialogContent.h
+        zlibrary/ui/src/maemo/dialogs/ZLGtkDialogManager.cpp
+        zlibrary/ui/src/maemo/dialogs/ZLGtkDialogManager.h
+        zlibrary/ui/src/maemo/dialogs/ZLGtkOptionsDialog.cpp
+        zlibrary/ui/src/maemo/dialogs/ZLGtkOptionsDialog.h
+        zlibrary/ui/src/maemo/dialogs/ZLGtkProgressDialog.cpp
+        zlibrary/ui/src/maemo/dialogs/ZLGtkProgressDialog.h
+        zlibrary/ui/src/maemo/dialogs/ZLGtkSelectionDialog.cpp
+        zlibrary/ui/src/maemo/dialogs/ZLGtkSelectionDialog.h
+        zlibrary/ui/src/maemo/dialogs/ZLGtkUtil.cpp
+        zlibrary/ui/src/maemo/dialogs/ZLGtkUtil.h
+        zlibrary/ui/src/maemo/library/ZLibrary.cpp
+        zlibrary/ui/src/maemo/message/ZLMaemoMessage.cpp
+        zlibrary/ui/src/maemo/message/ZLMaemoMessage.h
+        zlibrary/ui/src/maemo/network/ZLMaemoNetworkManager.cpp
+        zlibrary/ui/src/maemo/network/ZLMaemoNetworkManager.h
+        zlibrary/ui/src/maemo/optionView/ZLGtkOptionView.cpp
+        zlibrary/ui/src/maemo/optionView/ZLGtkOptionView.h
+        zlibrary/ui/src/maemo/optionView/ZLGtkOptionViewHolder.cpp
+        zlibrary/ui/src/maemo/optionView/ZLGtkOptionViewHolder.h
+        zlibrary/ui/src/maemo/time/ZLGtkTime.cpp
+        zlibrary/ui/src/maemo/time/ZLGtkTime.h
+        zlibrary/ui/src/maemo/view/ZLGtkPaintContext.cpp
+        zlibrary/ui/src/maemo/view/ZLGtkPaintContext.h
+        zlibrary/ui/src/maemo/view/ZLGtkViewWidget.cpp
+        zlibrary/ui/src/maemo/view/ZLGtkViewWidget.h
+        zlibrary/ui/src/maemo5/application/ZLGtkApplicationWindow.cpp
+        zlibrary/ui/src/maemo5/application/ZLGtkApplicationWindow.h
+        zlibrary/ui/src/maemo5/dialogs/ZLGtkDialog.cpp
+        zlibrary/ui/src/maemo5/dialogs/ZLGtkDialog.h
+        zlibrary/ui/src/maemo5/dialogs/ZLGtkDialogContent.cpp
+        zlibrary/ui/src/maemo5/dialogs/ZLGtkDialogContent.h
+        zlibrary/ui/src/maemo5/dialogs/ZLGtkDialogManager.cpp
+        zlibrary/ui/src/maemo5/dialogs/ZLGtkDialogManager.h
+        zlibrary/ui/src/maemo5/dialogs/ZLGtkOpenFileDialog.cpp
+        zlibrary/ui/src/maemo5/dialogs/ZLGtkOpenFileDialog.h
+        zlibrary/ui/src/maemo5/dialogs/ZLGtkOptionsDialog.cpp
+        zlibrary/ui/src/maemo5/dialogs/ZLGtkOptionsDialog.h
+        zlibrary/ui/src/maemo5/dialogs/ZLGtkProgressDialog.cpp
+        zlibrary/ui/src/maemo5/dialogs/ZLGtkProgressDialog.h
+        zlibrary/ui/src/maemo5/dialogs/ZLGtkUtil.cpp
+        zlibrary/ui/src/maemo5/dialogs/ZLGtkUtil.h
+        zlibrary/ui/src/maemo5/library/ZLibrary.cpp
+        zlibrary/ui/src/maemo5/network/ZLMaemoNetworkManager.cpp
+        zlibrary/ui/src/maemo5/network/ZLMaemoNetworkManager.h
+        zlibrary/ui/src/maemo5/optionView/ZLGtkOptionView.cpp
+        zlibrary/ui/src/maemo5/optionView/ZLGtkOptionView.h
+        zlibrary/ui/src/maemo5/optionView/ZLGtkOptionViewHolder.cpp
+        zlibrary/ui/src/maemo5/optionView/ZLGtkOptionViewHolder.h
+        zlibrary/ui/src/opie/application/ZLQtApplicationWindow.cpp
+        zlibrary/ui/src/opie/application/ZLQtApplicationWindow.h
+        zlibrary/ui/src/opie/dialogs/ZLFullScreenDialog.cpp
+        zlibrary/ui/src/opie/dialogs/ZLFullScreenDialog.h
+        zlibrary/ui/src/opie/dialogs/ZLQtDialog.cpp
+        zlibrary/ui/src/opie/dialogs/ZLQtDialog.h
+        zlibrary/ui/src/opie/dialogs/ZLQtDialogContent.cpp
+        zlibrary/ui/src/opie/dialogs/ZLQtDialogContent.h
+        zlibrary/ui/src/opie/dialogs/ZLQtDialogManager.cpp
+        zlibrary/ui/src/opie/dialogs/ZLQtDialogManager.h
+        zlibrary/ui/src/opie/dialogs/ZLQtOptionsDialog.cpp
+        zlibrary/ui/src/opie/dialogs/ZLQtOptionsDialog.h
+        zlibrary/ui/src/opie/dialogs/ZLQtOptionView.cpp
+        zlibrary/ui/src/opie/dialogs/ZLQtOptionView.h
+        zlibrary/ui/src/opie/dialogs/ZLQtSelectionDialog.cpp
+        zlibrary/ui/src/opie/dialogs/ZLQtSelectionDialog.h
+        zlibrary/ui/src/opie/dialogs/ZLQtUtil.cpp
+        zlibrary/ui/src/opie/dialogs/ZLQtUtil.h
+        zlibrary/ui/src/opie/dialogs/ZLQtWaitMessage.cpp
+        zlibrary/ui/src/opie/dialogs/ZLQtWaitMessage.h
+        zlibrary/ui/src/opie/library/ZLibrary.cpp
+        zlibrary/ui/src/opie/view/ZLQtPaintContext.cpp
+        zlibrary/ui/src/opie/view/ZLQtPaintContext.h
+        zlibrary/ui/src/opie/view/ZLQtViewWidget.cpp
+        zlibrary/ui/src/opie/view/ZLQtViewWidget.h
+        zlibrary/ui/src/qt/application-desktop/ZLQtApplicationWindow.cpp
+        zlibrary/ui/src/qt/application-desktop/ZLQtApplicationWindow.h
+        zlibrary/ui/src/qt/application-desktop/ZLQtPopupMenu.cpp
+        zlibrary/ui/src/qt/application-desktop/ZLQtPopupMenu.h
+        zlibrary/ui/src/qt/application-pdaxrom/ZLQtApplicationWindow.cpp
+        zlibrary/ui/src/qt/application-pdaxrom/ZLQtApplicationWindow.h
+        zlibrary/ui/src/qt/dialogs/ZLQtDialog.cpp
+        zlibrary/ui/src/qt/dialogs/ZLQtDialog.h
+        zlibrary/ui/src/qt/dialogs/ZLQtDialogContent.cpp
+        zlibrary/ui/src/qt/dialogs/ZLQtDialogContent.h
+        zlibrary/ui/src/qt/dialogs/ZLQtDialogManager.cpp
+        zlibrary/ui/src/qt/dialogs/ZLQtDialogManager.h
+        zlibrary/ui/src/qt/dialogs/ZLQtOpenFileDialog.cpp
+        zlibrary/ui/src/qt/dialogs/ZLQtOpenFileDialog.h
+        zlibrary/ui/src/qt/dialogs/ZLQtOptionsDialog.cpp
+        zlibrary/ui/src/qt/dialogs/ZLQtOptionsDialog.h
+        zlibrary/ui/src/qt/dialogs/ZLQtOptionView.cpp
+        zlibrary/ui/src/qt/dialogs/ZLQtOptionView.h
+        zlibrary/ui/src/qt/dialogs/ZLQtProgressDialog.cpp
+        zlibrary/ui/src/qt/dialogs/ZLQtProgressDialog.h
+        zlibrary/ui/src/qt/dialogs/ZLQtUtil.cpp
+        zlibrary/ui/src/qt/dialogs/ZLQtUtil.h
+        zlibrary/ui/src/qt/filesystem/ZLQtFSManager.cpp
+        zlibrary/ui/src/qt/filesystem/ZLQtFSManager.h
+        zlibrary/ui/src/qt/image/ZLQtImageManager.cpp
+        zlibrary/ui/src/qt/image/ZLQtImageManager.h
+        zlibrary/ui/src/qt/library/ZLibrary.cpp
+        zlibrary/ui/src/qt/time/ZLQtTime.cpp
+        zlibrary/ui/src/qt/time/ZLQtTime.h
+        zlibrary/ui/src/qt/util/ZLQtKeyUtil.cpp
+        zlibrary/ui/src/qt/util/ZLQtKeyUtil.h
+        zlibrary/ui/src/qt/view/ZLQtPaintContext.cpp
+        zlibrary/ui/src/qt/view/ZLQtPaintContext.h
+        zlibrary/ui/src/qt/view/ZLQtViewWidget.cpp
+        zlibrary/ui/src/qt/view/ZLQtViewWidget.h
+        zlibrary/ui/src/qt4/application/LineEditParameter.cpp
+        zlibrary/ui/src/qt4/application/ZLQtApplicationWindow.cpp
+        zlibrary/ui/src/qt4/application/ZLQtApplicationWindow.h
+        zlibrary/ui/src/qt4/dialogs/ZLQtDialog.cpp
+        zlibrary/ui/src/qt4/dialogs/ZLQtDialog.h
+        zlibrary/ui/src/qt4/dialogs/ZLQtDialogContent.cpp
+        zlibrary/ui/src/qt4/dialogs/ZLQtDialogContent.h
+        zlibrary/ui/src/qt4/dialogs/ZLQtDialogManager.cpp
+        zlibrary/ui/src/qt4/dialogs/ZLQtDialogManager.h
+        zlibrary/ui/src/qt4/dialogs/ZLQtOpenFileDialog.cpp
+        zlibrary/ui/src/qt4/dialogs/ZLQtOpenFileDialog.h
+        zlibrary/ui/src/qt4/dialogs/ZLQtOptionsDialog.cpp
+        zlibrary/ui/src/qt4/dialogs/ZLQtOptionsDialog.h
+        zlibrary/ui/src/qt4/dialogs/ZLQtOptionView.cpp
+        zlibrary/ui/src/qt4/dialogs/ZLQtOptionView.h
+        zlibrary/ui/src/qt4/dialogs/ZLQtProgressDialog.cpp
+        zlibrary/ui/src/qt4/dialogs/ZLQtProgressDialog.h
+        zlibrary/ui/src/qt4/dialogs/ZLQtUtil.cpp
+        zlibrary/ui/src/qt4/dialogs/ZLQtUtil.h
+        zlibrary/ui/src/qt4/filesystem/ZLQtFSManager.cpp
+        zlibrary/ui/src/qt4/filesystem/ZLQtFSManager.h
+        zlibrary/ui/src/qt4/image/ZLQtImageManager.cpp
+        zlibrary/ui/src/qt4/image/ZLQtImageManager.h
+        zlibrary/ui/src/qt4/library/ZLibrary.cpp
+        zlibrary/ui/src/qt4/time/ZLQtTime.cpp
+        zlibrary/ui/src/qt4/time/ZLQtTime.h
+        zlibrary/ui/src/qt4/util/ZLQtKeyUtil.cpp
+        zlibrary/ui/src/qt4/util/ZLQtKeyUtil.h
+        zlibrary/ui/src/qt4/view/ZLQtPaintContext.cpp
+        zlibrary/ui/src/qt4/view/ZLQtPaintContext.h
+        zlibrary/ui/src/qt4/view/ZLQtViewWidget.cpp
+        zlibrary/ui/src/qt4/view/ZLQtViewWidget.h
+        zlibrary/ui/src/qtopia/application/ZLQtApplicationWindow.cpp
+        zlibrary/ui/src/qtopia/application/ZLQtApplicationWindow.h
+        zlibrary/ui/src/qtopia/application/ZLQtMenuAction.h
+        zlibrary/ui/src/qtopia/dialogs/ZLFullScreenDialog.cpp
+        zlibrary/ui/src/qtopia/dialogs/ZLFullScreenDialog.h
+        zlibrary/ui/src/qtopia/dialogs/ZLQtDialog.cpp
+        zlibrary/ui/src/qtopia/dialogs/ZLQtDialog.h
+        zlibrary/ui/src/qtopia/dialogs/ZLQtDialogContent.cpp
+        zlibrary/ui/src/qtopia/dialogs/ZLQtDialogContent.h
+        zlibrary/ui/src/qtopia/dialogs/ZLQtDialogManager.cpp
+        zlibrary/ui/src/qtopia/dialogs/ZLQtDialogManager.h
+        zlibrary/ui/src/qtopia/dialogs/ZLQtOptionsDialog.cpp
+        zlibrary/ui/src/qtopia/dialogs/ZLQtOptionsDialog.h
+        zlibrary/ui/src/qtopia/dialogs/ZLQtSelectionDialog.cpp
+        zlibrary/ui/src/qtopia/dialogs/ZLQtSelectionDialog.h
+        zlibrary/ui/src/qtopia/dialogs/ZLQtUtil.cpp
+        zlibrary/ui/src/qtopia/dialogs/ZLQtUtil.h
+        zlibrary/ui/src/qtopia/dialogs/ZLQtWaitMessage.cpp
+        zlibrary/ui/src/qtopia/dialogs/ZLQtWaitMessage.h
+        zlibrary/ui/src/qtopia/library/ZLibrary.cpp
+        zlibrary/ui/src/qtopia/message/ZLQtopiaMessage.cpp
+        zlibrary/ui/src/qtopia/message/ZLQtopiaMessage.h
+        zlibrary/ui/src/qtopia/optionView/ZLQtOptionView.cpp
+        zlibrary/ui/src/qtopia/optionView/ZLQtOptionView.h
+        zlibrary/ui/src/qtopia/optionView/ZLQtOptionViewHolder.cpp
+        zlibrary/ui/src/qtopia/optionView/ZLQtOptionViewHolder.h
+        zlibrary/ui/src/qtopia/view/ZLQtPaintContext.cpp
+        zlibrary/ui/src/qtopia/view/ZLQtPaintContext.h
+        zlibrary/ui/src/qtopia/view/ZLQtViewWidget.cpp
+        zlibrary/ui/src/qtopia/view/ZLQtViewWidget.h
+        zlibrary/ui/src/qtopia/view/ZLZaurusFontHack.cpp
+        zlibrary/ui/src/qtopia/view/ZLZaurusFontHack.h
+        zlibrary/ui/src/unix/message/ZLUnixMessage.cpp
+        zlibrary/ui/src/unix/message/ZLUnixMessage.h
+        zlibrary/ui/src/win32/application/FloatingToolbar.cpp
+        zlibrary/ui/src/win32/application/Toolbar.cpp
+        zlibrary/ui/src/win32/application/ZLWin32ApplicationWindow.cpp
+        zlibrary/ui/src/win32/application/ZLWin32ApplicationWindow.h
+        zlibrary/ui/src/win32/application/ZLWin32PopupMenu.cpp
+        zlibrary/ui/src/win32/application/ZLWin32PopupMenu.h
+        zlibrary/ui/src/win32/dialogs/ZLWin32Dialog.cpp
+        zlibrary/ui/src/win32/dialogs/ZLWin32Dialog.h
+        zlibrary/ui/src/win32/dialogs/ZLWin32DialogContent.cpp
+        zlibrary/ui/src/win32/dialogs/ZLWin32DialogContent.h
+        zlibrary/ui/src/win32/dialogs/ZLWin32DialogManager.cpp
+        zlibrary/ui/src/win32/dialogs/ZLWin32DialogManager.h
+        zlibrary/ui/src/win32/dialogs/ZLWin32MessageBox.cpp
+        zlibrary/ui/src/win32/dialogs/ZLWin32MessageBox.h
+        zlibrary/ui/src/win32/dialogs/ZLWin32OptionsDialog.cpp
+        zlibrary/ui/src/win32/dialogs/ZLWin32OptionsDialog.h
+        zlibrary/ui/src/win32/dialogs/ZLWin32OptionView.cpp
+        zlibrary/ui/src/win32/dialogs/ZLWin32OptionView.h
+        zlibrary/ui/src/win32/dialogs/ZLWin32ProgressDialog.cpp
+        zlibrary/ui/src/win32/dialogs/ZLWin32ProgressDialog.h
+        zlibrary/ui/src/win32/image/ZLWin32ImageManager.cpp
+        zlibrary/ui/src/win32/image/ZLWin32ImageManager.h
+        zlibrary/ui/src/win32/image/ZLWin32ImageManager_bmp.cpp
+        zlibrary/ui/src/win32/image/ZLWin32ImageManager_gif.cpp
+        zlibrary/ui/src/win32/image/ZLWin32ImageManager_jpeg.cpp
+        zlibrary/ui/src/win32/image/ZLWin32ImageManager_png.cpp
+        zlibrary/ui/src/win32/image/ZLWin32ImageManager_tiff.cpp
+        zlibrary/ui/src/win32/library/ZLibraryWin32.cpp
+        zlibrary/ui/src/win32/message/ZLWin32Message.cpp
+        zlibrary/ui/src/win32/message/ZLWin32Message.h
+        zlibrary/ui/src/win32/time/ZLWin32Time.cpp
+        zlibrary/ui/src/win32/time/ZLWin32Time.h
+        zlibrary/ui/src/win32/view/ZLWin32PaintContext.cpp
+        zlibrary/ui/src/win32/view/ZLWin32PaintContext.h
+        zlibrary/ui/src/win32/view/ZLWin32ViewWidget.cpp
+        zlibrary/ui/src/win32/view/ZLWin32ViewWidget.h
+        zlibrary/ui/src/win32/w32widgets/W32Box.cpp
+        zlibrary/ui/src/win32/w32widgets/W32ColorComboBox.cpp
+        zlibrary/ui/src/win32/w32widgets/W32ColorComboBox.h
+        zlibrary/ui/src/win32/w32widgets/W32Container.cpp
+        zlibrary/ui/src/win32/w32widgets/W32Container.h
+        zlibrary/ui/src/win32/w32widgets/W32Control.cpp
+        zlibrary/ui/src/win32/w32widgets/W32Control.h
+        zlibrary/ui/src/win32/w32widgets/W32ControlCollection.cpp
+        zlibrary/ui/src/win32/w32widgets/W32ControlCollection.h
+        zlibrary/ui/src/win32/w32widgets/W32DialogPanel.cpp
+        zlibrary/ui/src/win32/w32widgets/W32DialogPanel.h
+        zlibrary/ui/src/win32/w32widgets/W32Event.cpp
+        zlibrary/ui/src/win32/w32widgets/W32Event.h
+        zlibrary/ui/src/win32/w32widgets/W32PropertySheet.cpp
+        zlibrary/ui/src/win32/w32widgets/W32StandaloneDialogPanel.cpp
+        zlibrary/ui/src/win32/w32widgets/W32Table.cpp
+        zlibrary/ui/src/win32/w32widgets/W32TreeView.cpp
+        zlibrary/ui/src/win32/w32widgets/W32TreeView.h
+        zlibrary/ui/src/win32/w32widgets/W32VBorderBox.cpp
+        zlibrary/ui/src/win32/w32widgets/W32Widget.cpp
+        zlibrary/ui/src/win32/w32widgets/W32Widget.h)
