@@ -164,6 +164,12 @@ void ZLCocoaApplicationWindow::setToolbarItemState(ZLToolbar::ItemPtr item, bool
 			++index;
 		}
 	}
+    auto items = toolbar.items;
+    if (index >= items.count) {
+        printf("index:%d count:%d", index, static_cast<int>(items.count));
+        return;
+    }
+
 	if (pair != 0) {
 		if (pair->second != visible) {
 			pair->second = visible;

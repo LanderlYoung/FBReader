@@ -124,6 +124,7 @@ void ZLApplication::setView(shared_ptr<ZLView> view) {
 	} else {
 		myInitialView = view;
 	}
+    refreshWindow();
 }
 
 shared_ptr<ZLView> ZLApplication::currentView() const {
