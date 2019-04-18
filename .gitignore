@@ -17,3 +17,4 @@ zlibrary/ui/libzlui-*.a
 fbreader/FBReader
 
 .idea
+cmake-build-debug
