@@ -275,8 +275,7 @@ void ZLTextModel::dumpToString(const ZLFile &file, std::ostream &out) {
     out << "dumpTextModel:" << file.path()
         << " " << myParagraphs.size() << std::endl;
 
-    for (auto it = myParagraphs.begin(); it != myParagraphs.end(); ++it) {
-        ZLTextParagraph *p = *it;
+    for (auto p : myParagraphs) {
         std::string kind;
         switch (p->kind()) {
             case ZLTextParagraph::TEXT_PARAGRAPH:
@@ -358,7 +357,5 @@ void ZLTextModel::dumpToString(const ZLFile &file, std::ostream &out) {
 #undef __CAST
 
         }
-
-        // todo
     }
 }
