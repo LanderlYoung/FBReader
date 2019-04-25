@@ -32,7 +32,8 @@ CFLAGS_NOARCH = \
 	-isysroot $(SYSROOT) \
 	-mmacosx-version-min=$(MACOS_VERSION) \
 	-gdwarf-2 \
-	-stdlib=libc++
+	-stdlib=libc++ \
+	-std=c++11
 	#-fvisibility=hidden -fvisibility-inlines-hidden \
 CFLAGS = $(ARCH_FLAGS) $(CFLAGS_NOARCH)
 LDFLAGS = $(ARCH_FLAGS) \

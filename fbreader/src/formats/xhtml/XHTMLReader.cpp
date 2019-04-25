@@ -18,6 +18,7 @@
  */
 
 #include <cstring>
+#include <iostream>
 
 #include <ZLFile.h>
 #include <ZLFileUtil.h>
@@ -503,7 +504,11 @@ bool XHTMLReader::readFile(const ZLFile &file, const std::string &referenceName)
 	myStyleEntryStack.clear();
 	myStylesToRemove = 0;
 
-	return readDocument(file);
+    auto ret = readDocument(file);
+
+    myModelReader.model().bookTextModel()->dumpToString(file, std::cout);
+
+    return ret;
 }
 
 void XHTMLReader::addStyleEntry(const std::string &tag, const std::string &aClass) {

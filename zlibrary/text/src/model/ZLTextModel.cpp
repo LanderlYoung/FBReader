@@ -19,10 +19,13 @@
 
 #include <cstring>
 #include <algorithm>
+#include <iostream>
 
 #include <ZLibrary.h>
 #include <ZLSearchUtil.h>
 #include <ZLLanguageUtil.h>
+#include <ZLFile.h>
+#include <ZLTextStyleCollection.h>
 
 #include "ZLTextModel.h"
 #include "ZLTextParagraph.h"
@@ -266,4 +269,96 @@ void ZLTextModel::addBidiReset() {
 	myLastEntryStart = myAllocator.allocate(1);
 	*myLastEntryStart = ZLTextParagraphEntry::RESET_BIDI_ENTRY;
 	myParagraphs.back()->addEntry(myLastEntryStart);
+}
+
+void ZLTextModel::dumpToString(const ZLFile &file, std::ostream &out) {
+    out << "dumpTextModel:" << file.path()
+        << " " << myParagraphs.size() << std::endl;
+
+    for (auto it = myParagraphs.begin(); it != myParagraphs.end(); ++it) {
+        ZLTextParagraph *p = *it;
+        std::string kind;
+        switch (p->kind()) {
+            case ZLTextParagraph::TEXT_PARAGRAPH:
+                kind = "text";
+                break;
+            case ZLTextParagraph::TREE_PARAGRAPH:
+                kind = "tree";
+                break;
+            default:
+                kind = "UNKNOWN";
+        }
+
+        out << std::endl
+            << "paragraph{ "
+            << "kind:" << kind
+            << ", entryNum:" << p->entryNumber()
+            << ", charNum:" << p->characterNumber()
+            << ", dataLen:" << p->textDataLength()
+            << " }" << std::endl;
+
+        for (ZLTextParagraph::Iterator pit = *p; !pit.isEnd(); pit.next()) {
+            const shared_ptr<ZLTextParagraphEntry> &entry = pit.entry();
+
+#define __CAST(TYPE) dynamic_cast<TYPE *>(&(*entry))
+            if (auto *text = __CAST(ZLTextEntry)) {
+                out << "text[" << text->data() << "]" << std::endl;
+            } else if (auto *control = __CAST(ZLTextControlEntry)) {
+                auto deco = ZLTextStyleCollection::Instance().decoration(control->kind());
+                std::string name;
+                if (deco != nullptr) {
+                    name = deco->name();
+                }
+                out << "control["
+                    << static_cast<int>(control->kind()) << ", " << name << ", " << control->isHyperlink() << ", " << control->isStart()
+                    << "]" << std::endl;
+            } else if (auto *link = __CAST(ZLTextHyperlinkControlEntry)) {
+                out << "link["
+                    << link->kind() << ", " << link->label() << ", " << link->hyperlinkType()
+                    << "]" << std::endl;
+            } else if (auto *image = __CAST(ImageEntry)) {
+                out << "image["
+                    << image->id()
+                    << "]" << std::endl;
+            } else if (auto *style = __CAST(ZLTextStyleEntry)) {
+                std::string align;
+                switch (style->alignmentType()) {
+                    case ZLTextAlignmentType::ALIGN_CENTER:
+                        align = "center";
+                        break;
+                    case ZLTextAlignmentType::ALIGN_JUSTIFY:
+                        align = "justify";
+                        break;
+                    case ZLTextAlignmentType::ALIGN_LEFT:
+                        align = "left";
+                        break;
+                    case ZLTextAlignmentType::ALIGN_RIGHT:
+                        align = "right";
+                        break;
+                    case ZLTextAlignmentType::ALIGN_LINESTART:
+                        align = "linestart";
+                        break;
+                    case ZLTextAlignmentType::ALIGN_UNDEFINED:
+                        align = "undefined";
+                        break;
+                }
+                out << "style["
+                    << "font-family:" << style->fontFamily() << ", "
+                    << "align:" << align << ", "
+                    << "font-modifier:" << static_cast<int>(style->fontModifier()) << ", "
+                    << "font-size-mag:" << static_cast<int>(style->fontSizeMag())
+                    << "]" << std::endl;
+            } else if (auto *fixh = __CAST(ZLTextFixedHSpaceEntry)) {
+                out << "fixh["
+                    << fixh->length()
+                    << "]" << std::endl;
+            } else if (auto *resetBidi = __CAST(ResetBidiEntry)) {
+                out << "resetBidi" << std::endl;
+            }
+#undef __CAST
+
+        }
+
+        // todo
+    }
 }
